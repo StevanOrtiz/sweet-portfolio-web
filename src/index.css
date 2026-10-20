@@ -15,3 +15,50 @@ body { @apply bg-studio-bg text-studio-text font-sans antialiased; margin: 0; }
 .btn { @apply px-3 py-1 rounded border border-studio-border bg-studio-panel2 text-sm hover:border-studio-accent disabled:opacity-50; }
 .btn-primary { @apply px-3 py-1 rounded bg-studio-accent text-white text-sm hover:opacity-90 disabled:opacity-50; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* ---- Hero scene ---- */
+.floor {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 60%;
+  background-image:
+    linear-gradient(#0d99ff30 1px, transparent 1px),
+    linear-gradient(90deg, #0d99ff30 1px, transparent 1px);
+  background-size: 56px 56px;
+  transform: perspective(520px) rotateX(62deg);
+  transform-origin: bottom;
+  animation: floor-move 2.4s linear infinite;
+  -webkit-mask-image: linear-gradient(to top, #000 25%, transparent);
+  mask-image: linear-gradient(to top, #000 25%, transparent);
+}
+@keyframes floor-move { to { background-position: 0 56px; } }
+.orb {
+  position: absolute; left: 50%; top: 38%; width: 520px; height: 520px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #0d99ff33 0%, transparent 65%);
+  animation: pulse 5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes pulse { 50% { opacity: .55; transform: translate(-50%, -50%) scale(1.12); } }
+.cube {
+  position: absolute; border: 1px solid #0d99ff66; background: #0d99ff12;
+  box-shadow: 0 0 24px #0d99ff22; animation: float 7s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(12deg); }
+  50% { transform: translateY(-22px) rotate(28deg); }
+}
+.gizmo { position: relative; display: inline-block; padding: 1rem 2rem; border: 1px solid #0d99ffaa; }
+.gizmo i { position: absolute; width: 8px; height: 8px; background: #fff; border: 1px solid #0d99ff; }
+.gizmo i:nth-child(1) { left: -5px; top: -5px; }
+.gizmo i:nth-child(2) { right: -5px; top: -5px; }
+.gizmo i:nth-child(3) { left: -5px; bottom: -5px; }
+.gizmo i:nth-child(4) { right: -5px; bottom: -5px; }
+.handles i { position: absolute; width: 7px; height: 7px; background: #fff; border: 1px solid #0d99ff; opacity: 0; transition: opacity .15s; }
+.group:hover .handles i, .group:focus-visible .handles i { opacity: 1; }
+.handles i:nth-child(1) { left: -4px; top: -4px; }
+.handles i:nth-child(2) { right: -4px; top: -4px; }
+.handles i:nth-child(3) { left: -4px; bottom: -4px; }
+.handles i:nth-child(4) { right: -4px; bottom: -4px; }
+.cursor { display: inline-block; width: .55em; height: 1em; margin-left: 1px; vertical-align: -2px; background: #0d99ff; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes flash { from { background: #0d99ff40; } to { background: transparent; } }
+.flash { animation: flash .6s ease-out; }

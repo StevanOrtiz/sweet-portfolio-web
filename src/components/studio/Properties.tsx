@@ -32,7 +32,7 @@ export default function Properties({ selected }: { selected: string }) {
   }
 
   return (
-    <div aria-label="Properties" className="h-full overflow-y-auto">
+    <div key={selected} aria-label="Properties" className="flash h-full overflow-y-auto">
       {rows.map(([k, v]) => <Prop key={k} k={k} v={v} />)}
     </div>
   )
