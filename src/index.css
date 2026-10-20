@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body { @apply bg-studio-bg text-studio-text font-sans antialiased; margin: 0; }
+* { scrollbar-width: thin; scrollbar-color: #3a3a40 transparent; }
+.grid-floor {
+  background-image:
+    linear-gradient(#ffffff0d 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff0d 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.field { @apply w-full bg-studio-bg border border-studio-border rounded px-2 py-1 text-sm outline-none focus:border-studio-accent; }
+.btn { @apply px-3 py-1 rounded border border-studio-border bg-studio-panel2 text-sm hover:border-studio-accent disabled:opacity-50; }
+.btn-primary { @apply px-3 py-1 rounded bg-studio-accent text-white text-sm hover:opacity-90 disabled:opacity-50; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
