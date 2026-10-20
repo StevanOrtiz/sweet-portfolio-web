@@ -58,7 +58,7 @@ export default function ContactView({ links, intro, onLog }: { links: LinkItem[]
   const choose = (l: LinkItem) => {
     if (sel === l.id) { setSel(null); return }
     setSel(l.id)
-    onLog(`> open ContactChannel "${l.label}"`)
+    onLog(`$ open channel "${l.label}"`)
   }
 
   return (
