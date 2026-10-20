@@ -1,4 +1,5 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, GripVertical } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Session } from '@supabase/supabase-js'
 import { supabase, supabaseConfigured } from '../lib/supabase'
@@ -60,10 +61,14 @@ function Editor({ entity }: { entity: Entity }) {
   const [busy, setBusy] = useState(false)
   const [msg, setMsg] = useState('')
   const key = pk(entity.table)
+  const sortable = entity.fields.some((f) => f.key === 'sort')
+  const dragFrom = useRef<number | null>(null)
+  const [over, setOver] = useState<number | null>(null)
 
   const load = async () => {
     const { data } = await supabase!.from(entity.table).select('*')
-    setRows(data ?? [])
+    const list = (data ?? []) as Row[]
+    setRows(sortable ? [...list].sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0)) : list)
     if (entity.table === 'works') setCats((await supabase!.from('categories').select('*')).data ?? [])
   }
   useEffect(() => { setSel(null); setMsg(''); void load() }, [entity.table])
@@ -86,6 +91,27 @@ function Editor({ entity }: { entity: Entity }) {
     setMsg(res.error ? res.error.message : 'Deleted.')
     if (!res.error) { await load(); await refresh(); setSel(null) }
   }
+  const reorder = async (from: number, to: number) => {
+    if (from === to || to < 0 || to >= rows.length) return
+    const next = [...rows]
+    next.splice(to, 0, next.splice(from, 1)[0])
+    const renumbered: Row[] = next.map((r, i) => ({ ...r, sort: i }))
+    setRows(renumbered)
+    const changed = renumbered.filter((r, i) => rows.find((o) => o.id === r.id)?.sort !== i)
+    const results = await Promise.all(changed.map((r) => supabase!.from(entity.table).update({ sort: r.sort }).eq('id', r.id)))
+    const failed = results.find((r) => r.error)
+    setMsg(failed?.error ? failed.error.message : 'Order saved.')
+    await load(); await refresh()
+  }
+  const moveImage = (k: string, i: number, d: number) =>
+    setSel((s) => {
+      if (!s) return s
+      const arr = [...(s[k] ?? [])]
+      const j = i + d
+      if (j < 0 || j >= arr.length) return s
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+      return { ...s, [k]: arr }
+    })
   const set = (k: string, v: unknown) => setSel((s) => (s ? { ...s, [k]: v } : s))
   const addFiles = async (k: string, files: FileList | null, multi: boolean) => {
     if (!files?.length) return
@@ -100,12 +126,27 @@ function Editor({ entity }: { entity: Entity }) {
   return (
     <div className="grid gap-4 md:grid-cols-[16rem_1fr]">
       <div className="space-y-1">
-        <button className="btn-primary w-full" onClick={() => setSel({ ...entity.defaults })}>+ Add</button>
-        {rows.map((r) => (
-          <button key={r[key]} onClick={() => setSel({ ...r, __saved: true })}
-            className={`block w-full truncate rounded px-2 py-1 text-left text-sm ${sel?.[key] === r[key] ? 'bg-studio-select' : 'bg-studio-panel hover:bg-studio-panel2'}`}>
-            {r[entity.titleKey] || '(untitled)'}
-          </button>
+        <button className="btn-primary w-full" onClick={() => setSel({ ...entity.defaults, ...(sortable ? { sort: rows.length } : {}) })}>+ Add</button>
+        {rows.map((r, idx) => (
+          <div key={r[key]}
+            draggable={sortable}
+            onDragStart={() => { dragFrom.current = idx }}
+            onDragOver={(e) => { if (sortable) { e.preventDefault(); setOver(idx) } }}
+            onDragLeave={() => setOver((o) => (o === idx ? null : o))}
+            onDrop={() => { setOver(null); if (dragFrom.current !== null) void reorder(dragFrom.current, idx); dragFrom.current = null }}
+            onDragEnd={() => { dragFrom.current = null; setOver(null) }}
+            className={`flex items-center gap-1 rounded ${over === idx ? 'outline outline-1 outline-studio-accent' : ''} ${sel?.[key] === r[key] ? 'bg-studio-select' : 'bg-studio-panel hover:bg-studio-panel2'}`}>
+            {sortable && <GripVertical size={14} className="ml-1 shrink-0 cursor-grab text-studio-dim" aria-hidden />}
+            <button onClick={() => setSel({ ...r, __saved: true })} className="min-w-0 flex-1 truncate px-1 py-1 text-left text-sm">
+              {r[entity.titleKey] || '(untitled)'}
+            </button>
+            {sortable && (
+              <>
+                <button aria-label="Move up" disabled={idx === 0} onClick={() => void reorder(idx, idx - 1)} className="p-1 text-studio-dim hover:text-white disabled:opacity-25"><ArrowUp size={14} /></button>
+                <button aria-label="Move down" disabled={idx === rows.length - 1} onClick={() => void reorder(idx, idx + 1)} className="p-1 text-studio-dim hover:text-white disabled:opacity-25"><ArrowDown size={14} /></button>
+              </>
+            )}
+          </div>
         ))}
       </div>
       <div>
@@ -131,6 +172,11 @@ function Editor({ entity }: { entity: Entity }) {
                           <img src={src} alt="" className="h-20 rounded border border-studio-border" />
                           <button type="button" className="absolute right-0 top-0 bg-black/70 px-1 text-xs"
                             onClick={() => set(f.key, sel[f.key].filter((_: string, j: number) => j !== i))}>✕</button>
+                          {i === 0 && <span className="absolute left-0 top-0 bg-studio-accent px-1 text-[10px] text-black">cover</span>}
+                          <div className="absolute inset-x-0 bottom-0 flex justify-between bg-black/60">
+                            <button type="button" aria-label="Move image left" disabled={i === 0} onClick={() => moveImage(f.key, i, -1)} className="px-1 disabled:opacity-25"><ChevronLeft size={14} /></button>
+                            <button type="button" aria-label="Move image right" disabled={i === sel[f.key].length - 1} onClick={() => moveImage(f.key, i, 1)} className="px-1 disabled:opacity-25"><ChevronRight size={14} /></button>
+                          </div>
                         </div>
                       ))}
                     </div>
