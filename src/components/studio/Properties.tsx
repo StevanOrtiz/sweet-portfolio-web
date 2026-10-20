@@ -12,7 +12,7 @@ type Row = [string, string, string?]
 
 export default function Properties({ selected }: { selected: string }) {
   const { content } = useContent()
-  let rows: Row[] = [['Name', 'SweetKanmi', accents.blue], ['ClassName', 'Model', accents.amber]]
+  let rows: Row[] = [['Name', 'SweetKanmi'], ['ClassName', 'Model', accents.amber]]
 
   if (selected.startsWith('work:')) {
     const w = content.works.find((x) => x.id === selected.slice(5))
@@ -33,7 +33,7 @@ export default function Properties({ selected }: { selected: string }) {
   } else if (selected === 'contact') {
     rows = [['Name', 'Contact'], ['ClassName', 'Folder', accents.amber], ['Channels', String(content.links.length), accents.blue]]
   } else {
-    rows = [['Name', content.profile.name, accents.blue], ['ClassName', 'Model', accents.amber], ['Role', content.profile.tagline, accents.violet]]
+    rows = [['Name', content.profile.name], ['ClassName', 'Model', accents.amber], ['Role', content.profile.tagline, accents.violet]]
   }
 
   return (

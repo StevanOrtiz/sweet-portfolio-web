@@ -54,7 +54,7 @@ export default function Splash({ ready, onDone }: { ready: boolean; onDone: () =
 
       <h1 className="relative z-10 mt-8 flex font-mono text-3xl font-bold tracking-[0.3em] sm:text-5xl" aria-label="SweetKanmi">
         {'SWEETKANMI'.split('').map((ch, i) => (
-          <motion.span key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.07, duration: 0.4 }} className="grad-text">{ch}</motion.span>
+          <motion.span key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.07, duration: 0.4 }} className="text-white">{ch}</motion.span>
         ))}
       </h1>
       <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1 }} className="relative z-10 mt-2 font-mono text-xs uppercase tracking-[0.35em] text-studio-dim">Roblox Builder &amp; 3D Modeler</motion.p>

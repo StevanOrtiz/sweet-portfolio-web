@@ -5,7 +5,7 @@ const items: [string, string][] = [['Home', 'home'], ['Gallery', 'gallery'], ['S
 export default function MenuBar({ selected, onSelect }: { selected: string; onSelect: (id: string) => void }) {
   return (
     <header className="flex h-9 shrink-0 items-center gap-1 overflow-x-auto whitespace-nowrap border-b border-studio-border bg-studio-panel px-2 text-[13px]">
-      <button onClick={() => onSelect('home')} className="grad-text mr-3 font-mono text-sm font-bold tracking-[0.18em]">SWEETKANMI</button>
+      <button onClick={() => onSelect('home')} className="text-white mr-3 font-mono text-sm font-bold tracking-[0.18em]">SWEETKANMI</button>
       {items.map(([label, id]) => {
         const active = selected === id || (id === 'gallery' && (selected.startsWith('work:') || selected.startsWith('cat:')))
         return (

@@ -114,7 +114,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
           </motion.div>
           <div className="flex flex-col items-center md:items-start">
             <motion.p variants={rise} className="font-mono text-sm text-studio-dim">{content.texts.hero_title}</motion.p>
-            <motion.h1 variants={rise} className="grad-text mt-1 text-5xl font-bold leading-tight tracking-tight sm:text-7xl">{p.name}</motion.h1>
+            <motion.h1 variants={rise} className="text-white mt-1 text-5xl font-bold leading-tight tracking-tight sm:text-7xl">{p.name}</motion.h1>
             <motion.p variants={rise} className="mt-2 font-mono text-sm" style={{ color: accents.amber }}>{p.tagline}</motion.p>
             <motion.p variants={rise} className="mt-4 max-w-xl whitespace-pre-line text-studio-text/90">{p.bio}</motion.p>
             {skills.length > 0 && (

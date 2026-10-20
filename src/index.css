@@ -64,7 +64,6 @@ body { @apply bg-studio-bg text-studio-text font-sans antialiased; margin: 0; }
 .flash { animation: flash .6s ease-out; }
 
 /* ---- Palette helpers ---- */
-.grad-text { background: linear-gradient(90deg, #0d99ff, #a66bff 55%, #ffb02e); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .btn-primary { background: linear-gradient(135deg, #0d99ff, #6f7bff); }
 .spot::before {
   content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
