@@ -30,7 +30,7 @@ const Panel = ({ title, children, className = '' }: { title: string; children: R
 )
 
 export default function Home() {
-  const { content, loading, live } = useContent()
+  const { content, source } = useContent()
   const [selected, setSelected] = useState('home')
   const [tab, setTab] = useState<Tab>('viewport')
   const nextId = useRef(0)
@@ -74,11 +74,11 @@ export default function Home() {
 
   const announced = useRef(false)
   useEffect(() => {
-    if (splash || loading || announced.current) return
+    if (splash || announced.current) return
     announced.current = true
-    push(live ? '[ok] content synced from database' : '[warn] database not configured: using placeholder data', `[ok] workspace ready in ${(Math.random() * 0.8 + 0.6).toFixed(1)}s`)
+    push(source === 'bundled seed' ? '[warn] backend unavailable: using bundled seed content' : `[ok] content loaded from ${source}`, `[ok] workspace ready in ${(Math.random() * 0.8 + 0.6).toFixed(1)}s`)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [splash, loading, live])
+  }, [splash, source])
 
   const label = (id: string) => {
     if (id.startsWith('work:')) return `Workspace.Gallery.${content.works.find((w) => w.id === id.slice(5))?.title ?? '?'}`
@@ -98,7 +98,7 @@ export default function Home() {
 
   return (
     <div className="flex h-full flex-col">
-      <AnimatePresence>{splash && <Splash key="splash" ready={!loading} onDone={finishSplash} />}</AnimatePresence>
+      <AnimatePresence>{splash && <Splash key="splash" ready onDone={finishSplash} />}</AnimatePresence>
       <MenuBar selected={selected} onSelect={select} />
 
       <div className="flex shrink-0 border-b border-studio-border text-sm md:hidden">

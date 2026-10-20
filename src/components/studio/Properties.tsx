@@ -19,19 +19,19 @@ export default function Properties({ selected }: { selected: string }) {
     if (w) rows = [
       ['Name', w.title], ['ClassName', 'Render', accents.amber],
       ['Category', content.categories.find((c) => c.id === w.category_id)?.name ?? '', accents.violet],
-      ['Tools', w.tools, accents.mint], ['Tags', w.tags, accents.rose], ['Images', String(w.images.length), accents.blue],
+      ['Tools', w.tools, accents.mint], ['Tags', w.tags, accents.rose], ['Images', String(w.images.length), accents.coral],
     ]
   } else if (selected.startsWith('cat:')) {
     const c = content.categories.find((x) => x.id === selected.slice(4))
-    rows = [['Name', c?.name ?? ''], ['ClassName', 'Folder', accents.amber], ['Children', String(content.works.filter((w) => w.category_id === c?.id && w.published).length), accents.blue]]
+    rows = [['Name', c?.name ?? ''], ['ClassName', 'Folder', accents.amber], ['Children', String(content.works.filter((w) => w.category_id === c?.id && w.published).length), accents.coral]]
   } else if (selected === 'gallery') {
-    rows = [['Name', 'Gallery'], ['ClassName', 'Folder', accents.amber], ['Children', String(content.works.filter((w) => w.published).length), accents.blue]]
+    rows = [['Name', 'Gallery'], ['ClassName', 'Folder', accents.amber], ['Children', String(content.works.filter((w) => w.published).length), accents.coral]]
   } else if (selected === 'services') {
-    rows = [['Name', 'Services'], ['ClassName', 'Folder', accents.amber], ['Children', String(content.services.length), accents.blue]]
+    rows = [['Name', 'Services'], ['ClassName', 'Folder', accents.amber], ['Children', String(content.services.length), accents.coral]]
   } else if (selected === 'about') {
     rows = [['Name', content.profile.name], ['ClassName', 'Profile', accents.amber], ['Skills', content.profile.skills, accents.mint]]
   } else if (selected === 'contact') {
-    rows = [['Name', 'Contact'], ['ClassName', 'Folder', accents.amber], ['Channels', String(content.links.length), accents.blue]]
+    rows = [['Name', 'Contact'], ['ClassName', 'Folder', accents.amber], ['Channels', String(content.links.length), accents.coral]]
   } else {
     rows = [['Name', content.profile.name], ['ClassName', 'Model', accents.amber], ['Role', content.profile.tagline, accents.violet]]
   }

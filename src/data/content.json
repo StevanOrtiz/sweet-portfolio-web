@@ -1,0 +1,293 @@
+{
+  "categories": [
+    {
+      "id": "c1",
+      "name": "Environments",
+      "sort": 0
+    },
+    {
+      "id": "c2",
+      "name": "Props & Assets",
+      "sort": 1
+    },
+    {
+      "id": "c3",
+      "name": "Characters",
+      "sort": 2
+    }
+  ],
+  "works": [
+    {
+      "id": "w1",
+      "title": "Placeholder Island",
+      "description": "Replace me from the admin panel with a real render. Every project can hold several images that flip through on the back of this card.",
+      "category_id": "c1",
+      "images": [
+        "/placeholders/island-1.svg",
+        "/placeholders/island-2.svg",
+        "/placeholders/island-3.svg"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "build, terrain",
+      "published": true,
+      "sort": 0
+    },
+    {
+      "id": "w2",
+      "title": "Placeholder Castle",
+      "description": "Replace me from the admin panel with a real render. Every project can hold several images that flip through on the back of this card.",
+      "category_id": "c1",
+      "images": [
+        "/placeholders/castle-1.svg",
+        "/placeholders/castle-2.svg",
+        "/placeholders/castle-3.svg"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "build, medieval",
+      "published": true,
+      "sort": 1
+    },
+    {
+      "id": "w3",
+      "title": "Placeholder Sword",
+      "description": "Replace me from the admin panel with a real render. Every project can hold several images that flip through on the back of this card.",
+      "category_id": "c2",
+      "images": [
+        "/placeholders/sword-1.svg",
+        "/placeholders/sword-2.svg",
+        "/placeholders/sword-3.svg"
+      ],
+      "tools": "Blender",
+      "tags": "model, weapon",
+      "published": true,
+      "sort": 2
+    },
+    {
+      "id": "w4",
+      "title": "Placeholder Character",
+      "description": "Replace me from the admin panel with a real render. Every project can hold several images that flip through on the back of this card.",
+      "category_id": "c3",
+      "images": [
+        "/placeholders/character-1.svg",
+        "/placeholders/character-2.svg",
+        "/placeholders/character-3.svg"
+      ],
+      "tools": "Blender",
+      "tags": "model, rig",
+      "published": true,
+      "sort": 3
+    }
+  ],
+  "services": [
+    {
+      "id": "s1",
+      "title": "Map & Environment Building",
+      "description": "Detailed worlds, interiors and terrain built directly in Roblox Studio.",
+      "icon": "map",
+      "sort": 0
+    },
+    {
+      "id": "s2",
+      "title": "3D Modeling",
+      "description": "Props, weapons, vehicles and assets modeled and optimized for Roblox.",
+      "icon": "box",
+      "sort": 1
+    },
+    {
+      "id": "s3",
+      "title": "Lighting & Atmosphere",
+      "description": "Mood, post-processing and lighting setups that make a place feel alive.",
+      "icon": "sun",
+      "sort": 2
+    },
+    {
+      "id": "s4",
+      "title": "Web & App Solutions",
+      "description": "Websites and small applications as a software development student.",
+      "icon": "code",
+      "sort": 3
+    }
+  ],
+  "links": [
+    {
+      "id": "l1",
+      "type": "discord",
+      "label": "Discord",
+      "url": "https://discord.com",
+      "note": "",
+      "sort": 0
+    },
+    {
+      "id": "l2",
+      "type": "email",
+      "label": "Email",
+      "url": "mailto:stevanortiz233@gmail.com",
+      "note": "",
+      "sort": 1
+    },
+    {
+      "id": "l3",
+      "type": "roblox",
+      "label": "Roblox",
+      "url": "https://www.roblox.com",
+      "note": "",
+      "sort": 2
+    },
+    {
+      "id": "l4",
+      "type": "github",
+      "label": "GitHub",
+      "url": "https://github.com/stevanortiz",
+      "note": "",
+      "sort": 3
+    }
+  ],
+  "tools": [
+    {
+      "id": "t1",
+      "name": "Roblox Studio",
+      "level": 85,
+      "note": "Building, terrain and level design. Placeholder text, edit in admin.",
+      "icon": "cube",
+      "sort": 0
+    },
+    {
+      "id": "t2",
+      "name": "Blender",
+      "level": 70,
+      "note": "Modeling props, characters and assets. Placeholder text, edit in admin.",
+      "icon": "shapes",
+      "sort": 1
+    },
+    {
+      "id": "t3",
+      "name": "Lighting",
+      "level": 75,
+      "note": "Atmosphere, mood and post-processing. Placeholder text, edit in admin.",
+      "icon": "sun",
+      "sort": 2
+    },
+    {
+      "id": "t4",
+      "name": "Terrain",
+      "level": 70,
+      "note": "Organic landscapes and biomes. Placeholder text, edit in admin.",
+      "icon": "map",
+      "sort": 3
+    },
+    {
+      "id": "t5",
+      "name": "Luau",
+      "level": 45,
+      "note": "Scripting basics for interactive builds. Placeholder text, edit in admin.",
+      "icon": "code",
+      "sort": 4
+    },
+    {
+      "id": "t6",
+      "name": "Web Dev",
+      "level": 60,
+      "note": "React, TypeScript and web apps. Placeholder text, edit in admin.",
+      "icon": "layers",
+      "sort": 5
+    }
+  ],
+  "stats": [
+    {
+      "id": "st1",
+      "label": "Builds",
+      "value": "00+",
+      "sort": 0
+    },
+    {
+      "id": "st2",
+      "label": "Models",
+      "value": "00+",
+      "sort": 1
+    },
+    {
+      "id": "st3",
+      "label": "Years",
+      "value": "0",
+      "sort": 2
+    }
+  ],
+  "timeline": [
+    {
+      "id": "tl1",
+      "year": "20XX",
+      "title": "Started building in Roblox Studio",
+      "text": "Placeholder. Tell the story of how it began.",
+      "sort": 0
+    },
+    {
+      "id": "tl2",
+      "year": "20XX",
+      "title": "First commissions",
+      "text": "Placeholder. Mention your first clients or projects.",
+      "sort": 1
+    },
+    {
+      "id": "tl3",
+      "year": "20XX",
+      "title": "Studying software development",
+      "text": "Placeholder. Add your studies and what you are learning now.",
+      "sort": 2
+    }
+  ],
+  "faq": [
+    {
+      "id": "f1",
+      "q": "What do you need to start a commission?",
+      "a": "A short brief: what you want, references, scale, art style and deadline. The more detail, the better.",
+      "sort": 0
+    },
+    {
+      "id": "f2",
+      "q": "How long does a project take?",
+      "a": "It depends on scope. I will give you an estimate after seeing your brief.",
+      "sort": 1
+    },
+    {
+      "id": "f3",
+      "q": "Which formats do you deliver?",
+      "a": "Builds as Roblox Studio models or places, and 3D assets in common formats. Confirm the exact format when we talk.",
+      "sort": 2
+    },
+    {
+      "id": "f4",
+      "q": "Where is the best place to reach me?",
+      "a": "Discord, where I reply most often. Email works too for formal requests.",
+      "sort": 3
+    }
+  ],
+  "profile": [
+    {
+      "id": "p1",
+      "name": "SweetKanmi",
+      "tagline": "Roblox Builder & 3D Modeler",
+      "bio": "Software development student and professional Roblox Studio builder and 3D modeler. I turn ideas into worlds, props and characters that feel alive. Edit this text from the admin panel.",
+      "avatar": "",
+      "skills": "Roblox Studio, Blender, Lighting, Terrain, Web development",
+      "facts": "Sunset enjoyer, Detail obsessed, Always learning"
+    }
+  ],
+  "availability": [
+    {
+      "id": "a1",
+      "open": true,
+      "response": "Usually replies within 24 hours",
+      "preferred": "discord"
+    }
+  ],
+  "site_texts": [
+    {
+      "key": "hero_title",
+      "value": "Hello, I'm"
+    },
+    {
+      "key": "contact_intro",
+      "value": "Open for commissions. Reach out through any channel below."
+    }
+  ]
+}

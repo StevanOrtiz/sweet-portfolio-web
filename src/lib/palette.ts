@@ -1,9 +1,11 @@
-export const accents = { blue: '#0d99ff', violet: '#a66bff', amber: '#ffb02e', mint: '#2ee6a6', rose: '#ff5d8f' }
-const cycle = [accents.blue, accents.violet, accents.amber, accents.mint, accents.rose]
+// Sunset low-poly palette. Keep in sync with tailwind.config.js.
+export const accents = { coral: '#ff6b57', violet: '#b78ad9', amber: '#f3c677', mint: '#4cc3bd', rose: '#ff8fa3' }
+export const border = '#43386b'
+const cycle = [accents.coral, accents.violet, accents.amber, accents.mint, accents.rose]
 export const pick = (i: number) => cycle[((i % cycle.length) + cycle.length) % cycle.length]
 
 export const linkColor = (type: string) =>
-  ({ discord: accents.violet, email: accents.amber, roblox: accents.rose, github: accents.mint, x: accents.blue, linkedin: accents.blue } as Record<string, string>)[type] ?? accents.blue
+  ({ discord: accents.violet, email: accents.amber, roblox: accents.rose, github: accents.mint, x: accents.coral, linkedin: accents.mint } as Record<string, string>)[type] ?? accents.coral
 
 export const defaultNote = (type: string) =>
   ({

@@ -14,3 +14,11 @@ export const linkIcon = (type: string, size = 18) => {
     default: return <Link2 size={size} />
   }
 }
+
+import { Brush, Hammer, Layers, Shapes, Sparkles } from 'lucide-react'
+
+const toolIcons: Record<string, typeof Box> = { cube: Box, shapes: Shapes, sun: Sun, map: MapIcon, code: Code, layers: Layers, brush: Brush, hammer: Hammer, sparkles: Sparkles }
+export const toolIcon = (key: string, size = 22) => {
+  const Icon = toolIcons[key] ?? Box
+  return <Icon size={size} />
+}

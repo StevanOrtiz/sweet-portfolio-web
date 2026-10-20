@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { adminEnabled } from '../../lib/repo'
 
 const items: [string, string][] = [['Home', 'home'], ['Gallery', 'gallery'], ['Services', 'services'], ['About', 'about'], ['Contact', 'contact']]
 
@@ -16,7 +17,7 @@ export default function MenuBar({ selected, onSelect }: { selected: string; onSe
           </button>
         )
       })}
-      <Link to="/admin" className="ml-auto rounded px-2 py-1 text-studio-dim transition-colors hover:bg-studio-panel2">Admin</Link>
+      {adminEnabled && <Link to="/admin" className="ml-auto rounded px-2 py-1 text-studio-dim transition-colors hover:bg-studio-panel2">Admin</Link>}
     </header>
   )
 }

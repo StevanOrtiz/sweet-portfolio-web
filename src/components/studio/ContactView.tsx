@@ -4,6 +4,8 @@ import { Check, ChevronRight, Copy, ExternalLink, X } from 'lucide-react'
 import type { LinkItem } from '../../types'
 import { defaultNote, linkColor } from '../../lib/palette'
 import { linkIcon } from './icons'
+import AvailabilityCard from './AvailabilityCard'
+import Faq from './Faq'
 
 function ContactWindow({ link, onClose }: { link: LinkItem; onClose: () => void }) {
   const [copied, setCopied] = useState(false)
@@ -37,7 +39,7 @@ function ContactWindow({ link, onClose }: { link: LinkItem; onClose: () => void 
             Open {link.label} <ExternalLink size={14} />
           </a>
           <button onClick={copy} className="btn flex items-center gap-1" aria-label="Copy link">
-            {copied ? <Check size={14} className="text-studio-mint" /> : <Copy size={14} />}
+            {copied ? <Check size={14} className="text-studio-ok" /> : <Copy size={14} />}
           </button>
         </div>
       </div>
@@ -62,7 +64,7 @@ export default function ContactView({ links, intro, onLog }: { links: LinkItem[]
   }
 
   return (
-    <div className="relative h-full">
+    <div className="relative min-h-full">
       <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.07 } } }} className="max-w-md p-6">
         <motion.h2 variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }} className="text-2xl font-bold">Contact</motion.h2>
         <motion.p variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }} className="mt-2 text-studio-dim">{intro}</motion.p>
@@ -85,6 +87,10 @@ export default function ContactView({ links, intro, onLog }: { links: LinkItem[]
           })}
         </ul>
         {!link && <p className="mt-4 font-mono text-xs text-studio-dim">Select a channel to open its window.</p>}
+        <motion.div variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }} className="mt-8 space-y-6">
+          <AvailabilityCard />
+          <Faq />
+        </motion.div>
       </motion.div>
       <AnimatePresence>{link && <ContactWindow key={link.id} link={link} onClose={() => setSel(null)} />}</AnimatePresence>
     </div>

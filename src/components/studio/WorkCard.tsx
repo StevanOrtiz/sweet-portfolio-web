@@ -52,7 +52,7 @@ export default function WorkCard({ work, index, color, category, onSelect, onOpe
           ))}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" style={{ top: '38%' }} />
           <div className="absolute inset-x-0 bottom-0 p-3">
-            <div className="text-sm font-semibold" style={{ color }}>{work.title}</div>
+            <div className="text-sm font-semibold text-white"><span className="mr-1.5 inline-block h-2 w-2 rounded-sm align-middle" style={{ background: color }} />{work.title}</div>
             <p className="mt-1 line-clamp-2 text-xs leading-snug text-white/85">{work.description}</p>
             <div className="mt-2 flex items-center gap-2">
               <button tabIndex={flipped ? 0 : -1} onClick={(e) => { e.stopPropagation(); onSelect(`work:${work.id}`) }}

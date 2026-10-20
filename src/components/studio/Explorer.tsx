@@ -43,7 +43,7 @@ export default function Explorer({ selected, onSelect }: Props) {
 
   return (
     <nav aria-label="Explorer" className="h-full overflow-y-auto py-1">
-      <Row depth={0} color={accents.blue} icon={<Box size={14} />} label="Workspace" id="home" selected={selected} onSelect={onSelect} />
+      <Row depth={0} color={accents.coral} icon={<Box size={14} />} label="Workspace" id="home" selected={selected} onSelect={onSelect} />
       <Row depth={1} color={accents.amber} icon={<Folder size={14} />} label="Gallery" id="gallery" selected={selected} onSelect={onSelect} toggle={{ open: !!open.gallery, set: flip('gallery') }} />
       {open.gallery && (
         <>
@@ -53,7 +53,7 @@ export default function Explorer({ selected, onSelect }: Props) {
               {open[c.id] !== false && <WorkRows list={published.filter((w) => w.category_id === c.id)} depth={3} color={pick(i)} />}
             </div>
           ))}
-          <WorkRows list={uncategorized} depth={2} color={accents.blue} />
+          <WorkRows list={uncategorized} depth={2} color={accents.coral} />
         </>
       )}
       <Row depth={1} color={accents.mint} icon={<Wrench size={14} />} label="Services" id="services" selected={selected} onSelect={onSelect} />

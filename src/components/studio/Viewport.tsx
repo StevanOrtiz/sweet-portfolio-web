@@ -7,28 +7,12 @@ import type { Work } from '../../types'
 import Handles from './Handles'
 import WorkCard from './WorkCard'
 import ContactView from './ContactView'
+import HomeScene from './HomeScene'
+import AboutView from './AboutView'
 import { serviceIcons } from './icons'
-
-const cubes = [
-  { l: '8%', t: '18%', s: 46, d: 0, c: accents.blue }, { l: '84%', t: '14%', s: 62, d: 1.2, c: accents.violet },
-  { l: '16%', t: '66%', s: 34, d: 2.4, c: accents.amber }, { l: '78%', t: '62%', s: 50, d: 0.6, c: accents.mint },
-  { l: '92%', t: '40%', s: 26, d: 3, c: accents.rose }, { l: '3%', t: '42%', s: 28, d: 1.8, c: accents.violet },
-]
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } }
 const rise = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' as const } } }
-
-const faces = ['translateZ(var(--h))', 'rotateY(180deg) translateZ(var(--h))', 'rotateY(90deg) translateZ(var(--h))', 'rotateY(-90deg) translateZ(var(--h))', 'rotateX(90deg) translateZ(var(--h))', 'rotateX(-90deg) translateZ(var(--h))']
-
-function SpinCube({ size, color, reverse }: { size: number; color: string; reverse?: boolean }) {
-  return (
-    <div className="scene" style={{ width: size, height: size }}>
-      <div className={`cube3d ${reverse ? 'rev' : ''}`} style={{ ['--h' as string]: `${size / 2}px` }}>
-        {faces.map((t, i) => <div key={i} className="f" style={{ transform: t, borderColor: color, background: `${color}14`, boxShadow: `inset 0 0 18px ${color}33` }} />)}
-      </div>
-    </div>
-  )
-}
 
 function Lightbox({ work, start, onClose }: { work: Work; start: number; onClose: () => void }) {
   const [i, setI] = useState(start)
@@ -94,44 +78,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
 
   let body: React.ReactNode
   if (selected === 'home') {
-    const p = content.profile
-    const skills = p.skills.split(',').map((s) => s.trim()).filter(Boolean)
-    body = (
-      <div className="relative flex min-h-full flex-col items-center justify-center overflow-hidden px-6 py-10">
-        <div className="floor" aria-hidden />
-        <div className="orb" aria-hidden />
-        {cubes.map((c, i) => (
-          <div key={i} aria-hidden className="cube" style={{ left: c.l, top: c.t, width: c.s, height: c.s, animationDelay: `${c.d}s`, borderColor: `${c.c}66`, background: `${c.c}14`, boxShadow: `0 0 24px ${c.c}33` }} />
-        ))}
-        <motion.div variants={stagger} initial="hidden" animate="show" className="relative z-10 flex max-w-3xl flex-col items-center gap-8 text-center md:flex-row md:text-left">
-          <motion.div variants={rise} className="relative shrink-0">
-            <div className="gizmo flex items-center justify-center" style={{ padding: 18 }}>
-              <i /><i /><i /><i />
-              {p.avatar
-                ? <img src={p.avatar} alt={p.name} className="h-32 w-32 object-cover" />
-                : <div className="flex h-32 w-32 items-center justify-center"><SpinCube size={72} color={accents.blue} /><div className="absolute"><SpinCube size={34} color={accents.amber} reverse /></div></div>}
-            </div>
-          </motion.div>
-          <div className="flex flex-col items-center md:items-start">
-            <motion.p variants={rise} className="font-mono text-sm text-studio-dim">{content.texts.hero_title}</motion.p>
-            <motion.h1 variants={rise} className="text-white mt-1 text-5xl font-bold leading-tight tracking-tight sm:text-7xl">{p.name}</motion.h1>
-            <motion.p variants={rise} className="mt-2 font-mono text-sm" style={{ color: accents.amber }}>{p.tagline}</motion.p>
-            <motion.p variants={rise} className="mt-4 max-w-xl whitespace-pre-line text-studio-text/90">{p.bio}</motion.p>
-            {skills.length > 0 && (
-              <motion.div variants={rise} className="mt-4 flex flex-wrap justify-center gap-2 md:justify-start">
-                {skills.map((s, i) => (
-                  <span key={s} className="rounded-sm border px-2 py-0.5 text-xs" style={{ borderColor: `${pick(i)}66`, color: pick(i), background: `${pick(i)}12` }}>{s}</span>
-                ))}
-              </motion.div>
-            )}
-            <motion.div variants={rise} className="mt-6 flex gap-3">
-              <button className="btn-primary" onClick={() => onSelect('gallery')}>View my work</button>
-              <button className="btn" onClick={() => onSelect('contact')}>Contact me</button>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
-    )
+    body = <HomeScene onSelect={onSelect} />
   } else if (selected === 'gallery' || selected.startsWith('cat:')) {
     const catId = selected.startsWith('cat:') ? selected.slice(4) : null
     const list = catId ? published.filter((w) => w.category_id === catId) : published
@@ -139,7 +86,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
       <div className="p-4">
         <div className="mb-4 flex flex-wrap gap-2">
           <button onClick={() => onSelect('gallery')} className="rounded-sm border px-2.5 py-1 text-xs transition-colors"
-            style={{ borderColor: !catId ? accents.blue : '#3a3a40', color: !catId ? '#000' : undefined, background: !catId ? accents.blue : 'transparent' }}>All</button>
+            style={{ borderColor: !catId ? accents.coral : '#43386b', color: !catId ? '#000' : undefined, background: !catId ? accents.coral : 'transparent' }}>All</button>
           {content.categories.map((c, i) => {
             const on = catId === c.id
             return (
@@ -199,20 +146,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
       </motion.div>
     )
   } else if (selected === 'about') {
-    const p = content.profile
-    body = (
-      <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-2xl p-6">
-        {p.avatar && <motion.img variants={rise} src={p.avatar} alt={p.name} className="mb-4 h-24 w-24 rounded-sm border border-studio-accent object-cover" />}
-        <motion.h2 variants={rise} className="text-2xl font-bold">{p.name}</motion.h2>
-        <motion.p variants={rise} className="font-mono text-sm" style={{ color: accents.amber }}>{p.tagline}</motion.p>
-        <motion.p variants={rise} className="mt-4 whitespace-pre-line text-studio-text">{p.bio}</motion.p>
-        <motion.div variants={rise} className="mt-4 flex flex-wrap gap-2">
-          {p.skills.split(',').map((s) => s.trim()).filter(Boolean).map((s, i) => (
-            <span key={s} className="rounded-sm border px-2 py-0.5 text-xs transition hover:brightness-125" style={{ borderColor: `${pick(i)}66`, color: pick(i), background: `${pick(i)}12` }}>{s}</span>
-          ))}
-        </motion.div>
-      </motion.div>
-    )
+    body = <AboutView />
   } else {
     body = <ContactView links={content.links} intro={content.texts.contact_intro} onLog={onLog} />
   }
@@ -221,7 +155,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
     <div ref={frame} onMouseMove={onMove} className="spot relative h-full">
       <div className={`relative z-[1] h-full overflow-y-auto ${selected === 'home' ? '' : 'grid-floor'}`}>
         <AnimatePresence mode="wait">
-          <motion.div key={selected} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="min-h-full" style={{ height: selected === 'contact' ? '100%' : undefined }}>
+          <motion.div key={selected} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="min-h-full">
             {body}
           </motion.div>
         </AnimatePresence>
