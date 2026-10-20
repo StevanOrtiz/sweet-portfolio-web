@@ -62,3 +62,26 @@ body { @apply bg-studio-bg text-studio-text font-sans antialiased; margin: 0; }
 @keyframes blink { 50% { opacity: 0; } }
 @keyframes flash { from { background: #0d99ff40; } to { background: transparent; } }
 .flash { animation: flash .6s ease-out; }
+
+/* ---- Palette helpers ---- */
+.grad-text { background: linear-gradient(90deg, #0d99ff, #a66bff 55%, #ffb02e); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.btn-primary { background: linear-gradient(135deg, #0d99ff, #6f7bff); }
+.spot::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(460px circle at var(--mx, 50%) var(--my, 30%), #a66bff18, transparent 60%);
+  transition: background .2s;
+}
+
+/* ---- Flip card ---- */
+.flipper { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.2, .8, .2, 1); }
+.face { position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 2px; }
+.face-back { transform: rotateY(180deg); }
+
+/* ---- Splash cube ---- */
+.scene { perspective: 760px; }
+.cube3d { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; animation: spin3d 7s linear infinite; }
+.cube3d.rev { animation-direction: reverse; animation-duration: 5s; }
+.cube3d .f { position: absolute; inset: 0; border: 1.5px solid; }
+@keyframes spin3d { from { transform: rotateX(-24deg) rotateY(0); } to { transform: rotateX(-24deg) rotateY(360deg); } }
+.splash-bar { background: linear-gradient(90deg, #0d99ff, #a66bff, #ffb02e); box-shadow: 0 0 18px #a66bff88; }
+@keyframes drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, -24px); } }

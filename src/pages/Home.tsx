@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import Splash from '../components/Splash'
 import { useContent } from '../lib/content'
 import MenuBar from '../components/studio/MenuBar'
 import Explorer from '../components/studio/Explorer'
@@ -21,20 +23,31 @@ export default function Home() {
   const [tab, setTab] = useState<Tab>('viewport')
   const nextId = useRef(0)
   const mk = (text: string): LogLine => ({ id: nextId.current++, text })
-  const [log, setLog] = useState<LogLine[]>(() => [
-    mk('> studio.boot()'),
-    mk('  mounting Workspace ...'),
-    mk('  starting Explorer, Viewport, Properties'),
-  ])
+  const [log, setLog] = useState<LogLine[]>([])
+  const [splash, setSplash] = useState(() => {
+    try { return new URLSearchParams(window.location.search).has('splash') || !localStorage.getItem('splash-seen') } catch { return true }
+  })
+  const finishSplash = useCallback(() => {
+    try { localStorage.setItem('splash-seen', '1') } catch { /* storage unavailable */ }
+    setSplash(false)
+  }, [])
+  const booted = useRef(false)
   const push = (...texts: string[]) => setLog((l) => [...l, ...texts.map(mk)].slice(-40))
+
+  useEffect(() => {
+    if (splash || booted.current) return
+    booted.current = true
+    push('> studio.boot()', '  mounting Workspace ...', '  starting Explorer, Viewport, Properties')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [splash])
 
   const announced = useRef(false)
   useEffect(() => {
-    if (loading || announced.current) return
+    if (splash || loading || announced.current) return
     announced.current = true
     push(live ? '[ok] content loaded from database' : '[warn] database empty or unset: showing placeholders', '[ok] studio ready')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, live])
+  }, [splash, loading, live])
 
   const label = (id: string) => {
     if (id.startsWith('work:')) return `Workspace.Gallery.${content.works.find((w) => w.id === id.slice(5))?.title ?? '?'}`
@@ -50,6 +63,7 @@ export default function Home() {
 
   return (
     <div className="flex h-full flex-col">
+      <AnimatePresence>{splash && <Splash key="splash" ready={!loading} onDone={finishSplash} />}</AnimatePresence>
       <MenuBar selected={selected} onSelect={select} />
 
       <div className="flex shrink-0 border-b border-studio-border text-sm md:hidden">
@@ -63,7 +77,7 @@ export default function Home() {
           <Explorer selected={selected} onSelect={select} />
         </Panel>
         <div className={`${tab === 'viewport' ? 'flex' : 'hidden'} min-w-0 flex-1 flex-col md:flex`}>
-          <Panel title="Viewport" className="flex-1"><Viewport selected={selected} onSelect={select} /></Panel>
+          <Panel title="Viewport" className="flex-1"><Viewport selected={selected} onSelect={select} onLog={(t) => push(t)} /></Panel>
           <Panel title="Output" className="hidden h-36 border-t md:flex"><Output log={log} /></Panel>
         </div>
         <Panel title="Properties" className={`${tab === 'properties' ? 'flex' : 'hidden'} w-full border-l md:flex md:w-64 md:shrink-0`}>

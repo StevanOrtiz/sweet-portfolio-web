@@ -67,3 +67,6 @@ insert into storage.buckets (id, name, public) values ('renders', 'renders', tru
 create policy "public read renders" on storage.objects for select using (bucket_id = 'renders');
 create policy "admin write renders" on storage.objects for all to authenticated
   using (bucket_id = 'renders') with check (bucket_id = 'renders');
+
+-- Migration for existing projects: short message shown in the Contact window.
+alter table links add column if not exists note text not null default '';

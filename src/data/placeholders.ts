@@ -13,10 +13,10 @@ export const placeholders: Content = {
     { id: 'c3', name: 'Characters', sort: 3 },
   ],
   works: [
-    { id: 'w1', title: 'Placeholder Island', description: 'Replace me from /admin with a real render.', category_id: 'c1', images: [placeholderImage('Placeholder Island', 200)], tools: 'Roblox Studio', tags: 'build, terrain', published: true, sort: 1 },
-    { id: 'w2', title: 'Placeholder Castle', description: 'Replace me from /admin with a real render.', category_id: 'c1', images: [placeholderImage('Placeholder Castle', 280)], tools: 'Roblox Studio', tags: 'build, medieval', published: true, sort: 2 },
-    { id: 'w3', title: 'Placeholder Sword', description: 'Replace me from /admin with a real render.', category_id: 'c2', images: [placeholderImage('Placeholder Sword', 20)], tools: 'Blender', tags: 'model, weapon', published: true, sort: 3 },
-    { id: 'w4', title: 'Placeholder Character', description: 'Replace me from /admin with a real render.', category_id: 'c3', images: [placeholderImage('Placeholder Character', 140)], tools: 'Blender', tags: 'model, rig', published: true, sort: 4 },
+    { id: 'w1', title: 'Placeholder Island', description: 'Replace me from /admin with a real render. Every project can hold several images that flip through on the back of this card.', category_id: 'c1', images: [placeholderImage('Placeholder Island', 200), placeholderImage('Placeholder Island · detail', 225), placeholderImage('Placeholder Island · wireframe', 250)], tools: 'Roblox Studio', tags: 'build, terrain', published: true, sort: 1 },
+    { id: 'w2', title: 'Placeholder Castle', description: 'Replace me from /admin with a real render. Every project can hold several images that flip through on the back of this card.', category_id: 'c1', images: [placeholderImage('Placeholder Castle', 280), placeholderImage('Placeholder Castle · detail', 305), placeholderImage('Placeholder Castle · wireframe', 330)], tools: 'Roblox Studio', tags: 'build, medieval', published: true, sort: 2 },
+    { id: 'w3', title: 'Placeholder Sword', description: 'Replace me from /admin with a real render. Every project can hold several images that flip through on the back of this card.', category_id: 'c2', images: [placeholderImage('Placeholder Sword', 20), placeholderImage('Placeholder Sword · detail', 45), placeholderImage('Placeholder Sword · wireframe', 70)], tools: 'Blender', tags: 'model, weapon', published: true, sort: 3 },
+    { id: 'w4', title: 'Placeholder Character', description: 'Replace me from /admin with a real render. Every project can hold several images that flip through on the back of this card.', category_id: 'c3', images: [placeholderImage('Placeholder Character', 140), placeholderImage('Placeholder Character · detail', 165), placeholderImage('Placeholder Character · wireframe', 190)], tools: 'Blender', tags: 'model, rig', published: true, sort: 4 },
   ],
   services: [
     { id: 's1', title: 'Map & Environment Building', description: 'Detailed worlds, interiors and terrain built directly in Roblox Studio.', icon: 'map', sort: 1 },
@@ -32,15 +32,15 @@ export const placeholders: Content = {
   ],
   profile: {
     id: 'p1',
-    name: 'Your Name',
+    name: 'SweetKanmi',
     tagline: 'Roblox Builder & 3D Modeler',
-    bio: 'Software development student and professional Roblox Studio builder. Edit this text from /admin.',
+    bio: 'Software development student and professional Roblox Studio builder and 3D modeler. I turn ideas into worlds, props and characters that feel alive. Edit this text from /admin.',
     avatar: '',
     skills: 'Roblox Studio, Blender, Lighting, Terrain, Web development',
   },
   texts: {
-    hero_title: 'Building worlds for Roblox.',
-    hero_subtitle: 'Select an item in the Explorer to inspect my work.',
+    hero_title: "Hello, I'm",
+    hero_subtitle: 'Browse my work in the Explorer, or open the gallery.',
     contact_intro: 'Open for commissions. Reach out through any channel below.',
   },
 }
