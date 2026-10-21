@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { Check, Copy, ExternalLink, LayoutDashboard, LogOut } from 'lucide-react'
+import { Check, Copy, ExternalLink, LayoutDashboard, LogOut, Upload } from 'lucide-react'
 import type { Session } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
 import { repo } from '../lib/repo'
 import { useContent } from '../lib/content'
 import type { Content, Table } from '../types'
 import CollectionEditor from '../components/admin/CollectionEditor'
+import BulkImport from '../components/admin/BulkImport'
 import Overview from '../components/admin/Overview'
 import { entities, navGroups } from '../components/admin/schema'
 import { ConfirmModal, ToastProvider } from '../components/admin/ui'
 
-type Tab = 'overview' | Table
+type Tab = 'overview' | 'import' | Table
 
 const countOf = (c: Content, t: Table): number | undefined => ({
   works: c.works.length, categories: c.categories.length, services: c.services.length, tools: c.tools.length, stats: c.stats.length,
@@ -102,6 +103,9 @@ function Shell({ needsLogin }: { needsLogin: boolean }) {
             <button onClick={() => go('overview')} className={`mx-2 mb-1 flex w-[calc(100%-1rem)] items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors ${tab === 'overview' ? 'bg-studio-select text-white' : 'text-studio-text hover:bg-studio-panel2'}`}>
               <LayoutDashboard size={15} className={tab === 'overview' ? 'text-studio-accent' : 'text-studio-dim'} />Overview
             </button>
+            <button onClick={() => go('import')} className={`mx-2 mb-1 flex w-[calc(100%-1rem)] items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors ${tab === 'import' ? 'bg-studio-select text-white' : 'text-studio-text hover:bg-studio-panel2'}`}>
+              <Upload size={15} className={tab === 'import' ? 'text-studio-accent' : 'text-studio-dim'} />Bulk import
+            </button>
             {navGroups.map((g) => (
               <div key={g.label} className="mt-3">
                 <div className="px-4 pb-1 font-mono text-[10px] uppercase tracking-widest text-studio-dim/70">{g.label}</div>
@@ -125,7 +129,7 @@ function Shell({ needsLogin }: { needsLogin: boolean }) {
         </nav>
 
         <main className="min-w-0 flex-1 bg-studio-bg">
-          {tab === 'overview' || !entity ? <Overview go={go} /> : <CollectionEditor key={tab} entity={entity} onDirtyChange={onDirtyChange} />}
+          {tab === 'import' ? <BulkImport go={() => setTab('works')} /> : tab === 'overview' || !entity ? <Overview go={go} /> : <CollectionEditor key={tab} entity={entity} onDirtyChange={onDirtyChange} />}
         </main>
       </div>
 
