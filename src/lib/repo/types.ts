@@ -23,5 +23,7 @@ export function buildContent(db: Record<Table, Row[]>): Content {
     tools: bySort(db.tools), stats: bySort(db.stats), timeline: bySort(db.timeline), faq: bySort(db.faq),
     profile: db.profile[0], availability: db.availability[0],
     texts: Object.fromEntries(db.site_texts.map((r) => [r.key, r.value])),
+    studio: db.studio[0], studioStats: bySort(db.studio_stats), studioSteps: bySort(db.studio_steps),
+    studioServices: bySort(db.studio_services), team: bySort(db.team),
   } as Content
 }

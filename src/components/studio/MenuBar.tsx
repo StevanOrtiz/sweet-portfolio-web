@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { adminEnabled } from '../../lib/repo'
 
-const items: [string, string][] = [['Home', 'home'], ['Gallery', 'gallery'], ['Services', 'services'], ['About', 'about'], ['Contact', 'contact']]
+const items: [string, string][] = [['Home', 'home'], ['Gallery', 'gallery'], ['Services', 'services'], ['Ware Studios', 'studio'], ['About', 'about'], ['Contact', 'contact']]
 
 export default function MenuBar({ selected, onSelect }: { selected: string; onSelect: (id: string) => void }) {
   return (

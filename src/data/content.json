@@ -289,5 +289,150 @@
       "key": "contact_intro",
       "value": "Open for commissions. Reach out through any channel below."
     }
+  ],
+  "studio": [
+    {
+      "id": "ws1",
+      "name": "WARE STUDIOS",
+      "tagline": "Roblox development studio",
+      "intro": "Placeholder: describe what WARE STUDIOS is, what you build and who you build it for. Edit this from the admin panel.",
+      "logo": "",
+      "ceo_note": "Founded and led by SweetKanmi.",
+      "join_text": "Want to commission the studio or join the team? Reach out and tell us about your project."
+    }
+  ],
+  "studio_stats": [
+    {
+      "id": "ss1",
+      "label": "Commissions completed",
+      "value": "00",
+      "sort": 0
+    },
+    {
+      "id": "ss2",
+      "label": "Happy clients",
+      "value": "00",
+      "sort": 1
+    },
+    {
+      "id": "ss3",
+      "label": "Team members",
+      "value": "00",
+      "sort": 2
+    },
+    {
+      "id": "ss4",
+      "label": "Years active",
+      "value": "0",
+      "sort": 3
+    }
+  ],
+  "studio_steps": [
+    {
+      "id": "st1",
+      "title": "Brief",
+      "text": "You tell us what you need: references, scale, style and deadline.",
+      "sort": 0
+    },
+    {
+      "id": "st2",
+      "title": "Plan",
+      "text": "We scope the work, agree on a timeline and confirm the details.",
+      "sort": 1
+    },
+    {
+      "id": "st3",
+      "title": "Production",
+      "text": "The team builds and models, sharing progress along the way.",
+      "sort": 2
+    },
+    {
+      "id": "st4",
+      "title": "Review",
+      "text": "You check the result and we iterate on your feedback.",
+      "sort": 3
+    },
+    {
+      "id": "st5",
+      "title": "Delivery",
+      "text": "Final files or place delivered and ready to use.",
+      "sort": 4
+    }
+  ],
+  "studio_services": [
+    {
+      "id": "sv1",
+      "title": "Builds & Environments",
+      "description": "Maps, interiors and worlds built in Roblox Studio. Placeholder text.",
+      "icon": "map",
+      "sort": 0
+    },
+    {
+      "id": "sv2",
+      "title": "3D Modeling",
+      "description": "Props, weapons and assets made for Roblox. Placeholder text.",
+      "icon": "box",
+      "sort": 1
+    },
+    {
+      "id": "sv3",
+      "title": "Lighting & Atmosphere",
+      "description": "Mood and lighting setups for finished places. Placeholder text.",
+      "icon": "sun",
+      "sort": 2
+    },
+    {
+      "id": "sv4",
+      "title": "Full Project Support",
+      "description": "End-to-end help from first idea to launch. Placeholder text.",
+      "icon": "code",
+      "sort": 3
+    }
+  ],
+  "team": [
+    {
+      "id": "m1",
+      "name": "SweetKanmi",
+      "role": "CEO & Lead Builder",
+      "bio": "Placeholder: a short line about your role at the studio.",
+      "avatar": "",
+      "skills": "Direction, Building, 3D Modeling",
+      "link": "",
+      "ceo": true,
+      "sort": 0
+    },
+    {
+      "id": "m2",
+      "name": "Teammate Name",
+      "role": "3D Artist",
+      "bio": "Placeholder bio.",
+      "avatar": "",
+      "skills": "Blender, Texturing",
+      "link": "",
+      "ceo": false,
+      "sort": 1
+    },
+    {
+      "id": "m3",
+      "name": "Teammate Name",
+      "role": "Builder",
+      "bio": "Placeholder bio.",
+      "avatar": "",
+      "skills": "Roblox Studio, Terrain",
+      "link": "",
+      "ceo": false,
+      "sort": 2
+    },
+    {
+      "id": "m4",
+      "name": "Teammate Name",
+      "role": "Scripter",
+      "bio": "Placeholder bio.",
+      "avatar": "",
+      "skills": "Luau, Systems",
+      "link": "",
+      "ceo": false,
+      "sort": 3
+    }
   ]
 }

@@ -20,6 +20,12 @@ create table if not exists profile (
 create table if not exists availability (id uuid primary key default gen_random_uuid(), open boolean not null default true, response text not null default '', preferred text not null default 'discord');
 create table if not exists site_texts (key text primary key, value text not null default '');
 
+create table if not exists studio (id uuid primary key default gen_random_uuid(), name text not null default '', tagline text not null default '', intro text not null default '', logo text not null default '', ceo_note text not null default '', join_text text not null default '');
+create table if not exists studio_stats (id uuid primary key default gen_random_uuid(), label text not null, value text not null default '', sort int not null default 0);
+create table if not exists studio_steps (id uuid primary key default gen_random_uuid(), title text not null, text text not null default '', sort int not null default 0);
+create table if not exists studio_services (id uuid primary key default gen_random_uuid(), title text not null, description text not null default '', icon text not null default 'box', sort int not null default 0);
+create table if not exists team (id uuid primary key default gen_random_uuid(), name text not null, role text not null default '', bio text not null default '', avatar text not null default '', skills text not null default '', link text not null default '', ceo boolean not null default false, sort int not null default 0);
+
 -- Migrations for projects created with an earlier version of this file.
 alter table links add column if not exists note text not null default '';
 alter table profile add column if not exists facts text not null default '';
@@ -27,7 +33,7 @@ alter table profile add column if not exists facts text not null default '';
 do $$
 declare t text;
 begin
-  foreach t in array array['categories','works','services','links','tools','stats','timeline','faq','profile','availability','site_texts'] loop
+  foreach t in array array['categories','works','services','links','tools','stats','timeline','faq','profile','availability','site_texts','studio','studio_stats','studio_steps','studio_services','team'] loop
     execute format('alter table %I enable row level security', t);
     execute format('drop policy if exists "admin write" on %I', t);
     execute format('create policy "admin write" on %I for all to authenticated using (true) with check (true)', t);

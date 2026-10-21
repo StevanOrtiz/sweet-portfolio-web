@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, ChevronDown, ChevronRight, Folder, Image, Mail, User, Wrench } from 'lucide-react'
+import { Box, Building2, ChevronDown, ChevronRight, Folder, Image, Mail, User, Wrench } from 'lucide-react'
 import { useContent } from '../../lib/content'
 import { accents, pick } from '../../lib/palette'
 
@@ -57,6 +57,7 @@ export default function Explorer({ selected, onSelect }: Props) {
         </>
       )}
       <Row depth={1} color={accents.mint} icon={<Wrench size={14} />} label="Services" id="services" selected={selected} onSelect={onSelect} />
+      <Row depth={1} color={accents.amber} icon={<Building2 size={14} />} label="Ware Studios" id="studio" selected={selected} onSelect={onSelect} />
       <Row depth={1} color={accents.rose} icon={<User size={14} />} label="About" id="about" selected={selected} onSelect={onSelect} />
       <Row depth={1} color={accents.violet} icon={<Mail size={14} />} label="Contact" id="contact" selected={selected} onSelect={onSelect} />
     </nav>

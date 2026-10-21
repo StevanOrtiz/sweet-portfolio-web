@@ -9,6 +9,7 @@ import WorkCard from './WorkCard'
 import ContactView from './ContactView'
 import HomeScene from './HomeScene'
 import AboutView from './AboutView'
+import StudioView from './StudioView'
 import { serviceIcons } from './icons'
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } }
@@ -145,6 +146,8 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
         ))}
       </motion.div>
     )
+  } else if (selected === 'studio') {
+    body = <StudioView onSelect={onSelect} />
   } else if (selected === 'about') {
     body = <AboutView />
   } else {

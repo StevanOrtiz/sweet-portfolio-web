@@ -28,6 +28,8 @@ export default function Properties({ selected }: { selected: string }) {
     rows = [['Name', 'Gallery'], ['ClassName', 'Folder', accents.amber], ['Children', String(content.works.filter((w) => w.published).length), accents.coral]]
   } else if (selected === 'services') {
     rows = [['Name', 'Services'], ['ClassName', 'Folder', accents.amber], ['Children', String(content.services.length), accents.coral]]
+  } else if (selected === 'studio') {
+    rows = [['Name', content.studio.name], ['ClassName', 'Studio', accents.amber], ['Members', String(content.team.length), accents.coral], ['CEO', content.team.find((m) => m.ceo)?.name ?? '', accents.violet]]
   } else if (selected === 'about') {
     rows = [['Name', content.profile.name], ['ClassName', 'Profile', accents.amber], ['Skills', content.profile.skills, accents.mint]]
   } else if (selected === 'contact') {
