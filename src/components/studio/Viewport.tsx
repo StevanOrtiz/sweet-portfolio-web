@@ -87,7 +87,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
       <div className="p-4">
         <div className="mb-4 flex flex-wrap gap-2">
           <button onClick={() => onSelect('gallery')} className="rounded-sm border px-2.5 py-1 text-xs transition-colors"
-            style={{ borderColor: !catId ? accents.coral : '#43386b', color: !catId ? '#000' : undefined, background: !catId ? accents.coral : 'transparent' }}>All</button>
+            style={{ borderColor: !catId ? accents.ice : '#2a3038', color: !catId ? '#000' : undefined, background: !catId ? accents.ice : 'transparent' }}>All</button>
           {content.categories.map((c, i) => {
             const on = catId === c.id
             return (
@@ -117,9 +117,9 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
         <h2 className="mt-3 text-xl font-semibold">{w.title}</h2>
         <div className="mt-2 flex flex-wrap gap-2 text-xs">
           {catName(w.category_id) && <span className="rounded-sm px-1.5 py-0.5 font-mono text-black" style={{ background: color }}>{catName(w.category_id)}</span>}
-          {w.tools && <span className="rounded-sm border px-1.5 py-0.5" style={{ borderColor: `${accents.mint}66`, color: accents.mint }}>{w.tools}</span>}
+          {w.tools && <span className="rounded-sm border px-1.5 py-0.5" style={{ borderColor: `${accents.ice}66`, color: accents.ice }}>{w.tools}</span>}
           {w.tags.split(',').map((t) => t.trim()).filter(Boolean).map((t) => (
-            <span key={t} className="rounded-sm border px-1.5 py-0.5" style={{ borderColor: `${accents.rose}55`, color: accents.rose }}>{t}</span>
+            <span key={t} className="rounded-sm border px-1.5 py-0.5" style={{ borderColor: `${accents.steel}55`, color: accents.steel }}>{t}</span>
           ))}
         </div>
         <p className="mt-3 text-studio-dim">{w.description}</p>

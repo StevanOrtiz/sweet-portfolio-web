@@ -6,7 +6,7 @@ export default function AvailabilityCard() {
   const { content } = useContent()
   const { availability: a, links } = content
   const preferred = links.find((l) => l.type === a.preferred)
-  const color = a.open ? '#8fd694' : accents.amber
+  const color = a.open ? accents.ok : accents.warn
 
   return (
     <div className="rounded-sm border bg-studio-panel p-4" style={{ borderColor: `${color}77` }}>

@@ -57,15 +57,15 @@ export default function Hotbar({ tools }: { tools: Tool[] }) {
       <div className="flex max-w-full gap-1.5 overflow-x-auto rounded-lg border border-white/10 bg-black/40 p-2 backdrop-blur-sm" role="toolbar" aria-label="Toolbelt">
         {slots.map((tool, i) => {
           const on = tool && tool.id === active
-          const color = tool ? pick(i) : accents.violet
+          const color = tool ? pick(i) : accents.steel
           return (
             <button key={i} disabled={!tool} aria-pressed={!!on} aria-label={tool ? `${i + 1}: ${tool.name}` : `Empty slot ${i + 1}`}
               onClick={() => tool && setActive(on ? null : tool.id)}
               onPointerEnter={() => tool && setHover(tool.id)} onPointerLeave={() => setHover(null)}
               className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-md border-2 transition-all duration-150 enabled:hover:-translate-y-1"
               style={{
-                borderColor: on ? color : tool ? '#f6e9d855' : '#f6e9d822',
-                background: on ? `${color}30` : '#231c3dcc', color: tool ? color : '#a99bc455',
+                borderColor: on ? color : tool ? '#e8ecf155' : '#e8ecf122',
+                background: on ? `${color}30` : '#12151acc', color: tool ? color : '#8a94a355',
                 transform: on ? 'translateY(-6px)' : undefined, boxShadow: on ? `0 8px 18px ${color}40` : undefined,
               }}>
               <span className="absolute left-1 top-0.5 font-mono text-[9px] text-studio-text/70">{i + 1}</span>

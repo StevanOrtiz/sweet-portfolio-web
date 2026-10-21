@@ -20,20 +20,20 @@ export default function HomeScene({ onSelect }: { onSelect: (id: string) => void
           className="rounded-md border border-white/10 bg-studio-bg/70 p-5 shadow-2xl backdrop-blur-md">
           <motion.div variants={rise} className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-studio-dim">
             <span>Player profile</span>
-            <span className="flex items-center gap-1.5 normal-case tracking-normal" style={{ color: availability.open ? '#8fd694' : accents.amber }}>
-              <span className="h-2 w-2 rounded-full" style={{ background: availability.open ? '#8fd694' : accents.amber }} />
+            <span className="flex items-center gap-1.5 normal-case tracking-normal" style={{ color: availability.open ? accents.ok : accents.warn }}>
+              <span className="h-2 w-2 rounded-full" style={{ background: availability.open ? accents.ok : accents.warn }} />
               {availability.open ? 'Open for commissions' : 'Currently booked'}
             </span>
           </motion.div>
 
           <motion.div variants={rise} className="mt-4 flex items-center gap-4">
-            <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border-2 border-studio-amber/70 bg-gradient-to-br from-studio-accent to-studio-violet">
-              {p.avatar ? <img src={p.avatar} alt={p.name} className="h-full w-full object-cover" /> : <span className="text-4xl font-bold text-studio-bg">{p.name.slice(0, 1)}</span>}
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border border-studio-accent/60 bg-studio-panel2">
+              {p.avatar ? <img src={p.avatar} alt={p.name} className="h-full w-full object-cover" /> : <span className="text-4xl font-bold text-studio-accent">{p.name.slice(0, 1)}</span>}
             </div>
             <div className="min-w-0">
               <p className="font-mono text-xs text-studio-dim">{texts.hero_title}</p>
               <h1 className="break-words text-4xl font-bold leading-none tracking-tight text-white">{p.name}</h1>
-              <p className="mt-1.5 font-mono text-xs" style={{ color: accents.amber }}>{p.tagline}</p>
+              <p className="mt-1.5 font-mono text-xs" style={{ color: accents.steel }}>{p.tagline}</p>
             </div>
           </motion.div>
 
@@ -43,7 +43,7 @@ export default function HomeScene({ onSelect }: { onSelect: (id: string) => void
             <motion.div variants={rise} className="mt-4 grid grid-cols-3 gap-2">
               {stats.slice(0, 3).map((s, i) => (
                 <div key={s.id} className="rounded-sm border border-studio-border bg-black/20 px-2 py-2 text-center">
-                  <div className="text-xl font-bold" style={{ color: [accents.coral, accents.amber, accents.mint][i] }}>{s.value}</div>
+                  <div className="text-xl font-bold" style={{ color: [accents.ice, accents.steel, accents.ice][i] }}>{s.value}</div>
                   <div className="font-mono text-[10px] uppercase tracking-wide text-studio-dim">{s.label}</div>
                 </div>
               ))}

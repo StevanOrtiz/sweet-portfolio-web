@@ -40,16 +40,13 @@ export default function Splash({ ready, onDone }: { ready: boolean; onDone: () =
     <motion.div
       role="status" aria-label="Loading"
       initial={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.06, filter: 'blur(10px)' }} transition={{ duration: 0.6, ease: 'easeInOut' }}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-[#120e22]"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-studio-bg"
     >
-      <div className="absolute -left-32 -top-32 h-[480px] w-[480px] rounded-full opacity-60" style={{ background: `radial-gradient(circle, ${accents.violet}40, transparent 65%)`, animation: 'drift 9s ease-in-out infinite' }} />
-      <div className="absolute -bottom-40 -right-32 h-[520px] w-[520px] rounded-full opacity-60" style={{ background: `radial-gradient(circle, ${accents.coral}40, transparent 65%)`, animation: 'drift 11s ease-in-out infinite reverse' }} />
-      <div className="absolute bottom-10 right-1/3 h-[300px] w-[300px] rounded-full opacity-40" style={{ background: `radial-gradient(circle, ${accents.amber}30, transparent 65%)`, animation: 'drift 13s ease-in-out infinite' }} />
       <div className="floor" aria-hidden />
 
       <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, ease: 'easeOut' }} className="relative z-10 flex h-40 w-40 items-center justify-center">
-        <Cube size={104} color={accents.coral} />
-        <Cube size={52} color={accents.amber} reverse />
+        <Cube size={104} color={accents.ice} />
+        <Cube size={52} color={accents.steel} reverse />
       </motion.div>
 
       <h1 className="relative z-10 mt-8 flex font-mono text-3xl font-bold tracking-[0.3em] sm:text-5xl" aria-label="SweetKanmi">
@@ -65,7 +62,7 @@ export default function Splash({ ready, onDone }: { ready: boolean; onDone: () =
         </div>
         <div className="mt-2 flex justify-between font-mono text-xs text-studio-dim">
           <span>{stage}<span className="cursor" /></span>
-          <span style={{ color: accents.amber }}>{Math.floor(pct)}%</span>
+          <span style={{ color: accents.steel }}>{Math.floor(pct)}%</span>
         </div>
       </div>
 

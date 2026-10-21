@@ -13,7 +13,7 @@ export default function MenuBar({ selected, onSelect }: { selected: string; onSe
           <button key={id} onClick={() => onSelect(id)}
             className={`relative rounded px-2 py-1 transition-colors ${active ? 'bg-studio-select text-white' : 'hover:bg-studio-panel2'}`}>
             {label}
-            {active && <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-studio-accent via-studio-violet to-studio-amber" />}
+            {active && <span className="absolute inset-x-1 -bottom-px h-px bg-studio-accent" />}
           </button>
         )
       })}

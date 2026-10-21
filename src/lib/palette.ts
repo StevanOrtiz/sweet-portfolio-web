@@ -1,11 +1,11 @@
-// Sunset low-poly palette. Keep in sync with tailwind.config.js.
-export const accents = { coral: '#ff6b57', violet: '#b78ad9', amber: '#f3c677', mint: '#4cc3bd', rose: '#ff8fa3' }
-export const border = '#43386b'
-const cycle = [accents.coral, accents.violet, accents.amber, accents.mint, accents.rose]
+// Obsidian + ice palette: neutral base, ONE accent (ice), steel for secondary text. Keep in sync with tailwind.config.js.
+export const accents = { ice: '#8cc8e8', steel: '#b4bfcc', ok: '#7fd4a0', warn: '#d9b36a' }
+export const border = '#2a3038'
+const cycle = [accents.ice, accents.steel, accents.ice, accents.steel, accents.ice]
 export const pick = (i: number) => cycle[((i % cycle.length) + cycle.length) % cycle.length]
 
-export const linkColor = (type: string) =>
-  ({ discord: accents.violet, email: accents.amber, roblox: accents.rose, github: accents.mint, x: accents.coral, linkedin: accents.mint } as Record<string, string>)[type] ?? accents.coral
+// Every channel shares the single accent; the icon and label tell them apart.
+export const linkColor = (_type: string) => accents.ice
 
 export const defaultNote = (type: string) =>
   ({

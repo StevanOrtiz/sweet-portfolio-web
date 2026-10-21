@@ -3,9 +3,9 @@ import * as THREE from 'three'
 
 type Props = { onStage: (stage: number) => void; onFail: () => void }
 
-const palette = { bottom: new THREE.Color('#b78ad9'), top: new THREE.Color('#ff7a8c') }
+const palette = { bottom: new THREE.Color('#3f6178'), top: new THREE.Color('#d6f0ff') }
 
-// Paints each triangle one flat color from a violet-to-coral gradient so the facets read as low-poly.
+// Paints each triangle one flat color from a steel-to-ice gradient so the facets read as low-poly.
 function paint(geo: THREE.BufferGeometry, seed: number) {
   geo.computeBoundingBox()
   const { min, max } = geo.boundingBox!
@@ -26,10 +26,10 @@ function glowTexture() {
   c.width = c.height = 128
   const g = c.getContext('2d')!
   const grad = g.createRadialGradient(64, 64, 0, 64, 64, 64)
-  grad.addColorStop(0, 'rgba(255,150,150,0.95)')
-  grad.addColorStop(0.35, 'rgba(255,107,87,0.32)')
-  grad.addColorStop(0.8, 'rgba(255,107,87,0)')
-  grad.addColorStop(1, 'rgba(255,107,87,0)')
+  grad.addColorStop(0, 'rgba(170,220,250,0.9)')
+  grad.addColorStop(0.35, 'rgba(140,200,232,0.28)')
+  grad.addColorStop(0.8, 'rgba(140,200,232,0)')
+  grad.addColorStop(1, 'rgba(140,200,232,0)')
   g.fillStyle = grad
   g.fillRect(0, 0, 128, 128)
   return new THREE.CanvasTexture(c)
@@ -66,9 +66,9 @@ export default function CrystalCanvas({ onStage, onFail }: Props) {
 
     const mat = new THREE.MeshStandardMaterial({
       vertexColors: true, flatShading: true, roughness: 0.32, metalness: 0.15, transparent: true, opacity: 0,
-      emissive: new THREE.Color('#ff8fa3'), emissiveIntensity: 0,
+      emissive: new THREE.Color('#8cc8e8'), emissiveIntensity: 0,
     })
-    const lineMat = new THREE.LineBasicMaterial({ color: '#f6e9d8', transparent: true, opacity: 0.95 })
+    const lineMat = new THREE.LineBasicMaterial({ color: '#e8ecf1', transparent: true, opacity: 0.95 })
 
     const cluster = new THREE.Group()
     scene.add(cluster)
@@ -99,12 +99,12 @@ export default function CrystalCanvas({ onStage, onFail }: Props) {
     glow.position.set(0, 0, -1.4)
     scene.add(glow)
 
-    const ambient = new THREE.AmbientLight('#b9a3ff', 0.3)
-    const key = new THREE.DirectionalLight('#ffb36b', 0)
+    const ambient = new THREE.AmbientLight('#9fb4c8', 0.3)
+    const key = new THREE.DirectionalLight('#ffffff', 0)
     key.position.set(4, 5, 5)
-    const rim = new THREE.DirectionalLight('#4cc3bd', 0)
+    const rim = new THREE.DirectionalLight('#8cc8e8', 0)
     rim.position.set(-5, 2, -3)
-    const inner = new THREE.PointLight('#ff8fa3', 0, 10)
+    const inner = new THREE.PointLight('#bfe6ff', 0, 10)
     inner.position.set(0, 0, 1.6)
     scene.add(ambient, key, rim, inner)
 

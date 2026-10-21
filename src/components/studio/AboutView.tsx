@@ -20,12 +20,12 @@ export default function AboutView() {
     <motion.div variants={stagger} initial="hidden" animate="show" className="grid gap-8 p-6 lg:grid-cols-2">
       <div className="space-y-6">
         <motion.div variants={rise} className="flex items-center gap-4">
-          <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md border-2 border-studio-amber/70 bg-gradient-to-br from-studio-accent to-studio-violet">
-            {p.avatar ? <img src={p.avatar} alt={p.name} className="h-full w-full object-cover" /> : <span className="text-5xl font-bold text-studio-bg">{p.name.slice(0, 1)}</span>}
+          <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-md border border-studio-accent/60 bg-studio-panel2">
+            {p.avatar ? <img src={p.avatar} alt={p.name} className="h-full w-full object-cover" /> : <span className="text-5xl font-bold text-studio-accent">{p.name.slice(0, 1)}</span>}
           </div>
           <div>
             <h2 className="text-3xl font-bold text-white">{p.name}</h2>
-            <p className="font-mono text-sm" style={{ color: accents.amber }}>{p.tagline}</p>
+            <p className="font-mono text-sm" style={{ color: accents.steel }}>{p.tagline}</p>
           </div>
         </motion.div>
 
