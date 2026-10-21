@@ -1,50 +1,23 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, GripVertical } from 'lucide-react'
+import { Check, Copy, ExternalLink, LayoutDashboard, LogOut } from 'lucide-react'
 import type { Session } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
 import { repo } from '../lib/repo'
 import { useContent } from '../lib/content'
-import { pkOf } from '../lib/repo/types'
-import type { Row, Table } from '../types'
+import type { Content, Table } from '../types'
+import CollectionEditor from '../components/admin/CollectionEditor'
+import Overview from '../components/admin/Overview'
+import { entities, navGroups } from '../components/admin/schema'
+import { ConfirmModal, ToastProvider } from '../components/admin/ui'
 
-type Field = { key: string; label: string; type?: 'text' | 'textarea' | 'number' | 'bool' | 'images' | 'image' | 'category' }
-type Entity = { table: Table; label: string; fields: Field[]; titleKey: string; defaults: Row; singleton?: boolean }
+type Tab = 'overview' | Table
 
-const entities: Entity[] = [
-  { table: 'works', label: 'Works', titleKey: 'title', defaults: { title: 'New work', description: '', category_id: null, images: [], tools: '', tags: '', published: true, sort: 0 },
-    fields: [{ key: 'title', label: 'Title' }, { key: 'description', label: 'Description (shown on the back of the card)', type: 'textarea' }, { key: 'category_id', label: 'Category', type: 'category' }, { key: 'images', label: 'Images (first one is the cover)', type: 'images' }, { key: 'tools', label: 'Tools' }, { key: 'tags', label: 'Tags (comma separated)' }, { key: 'published', label: 'Published', type: 'bool' }] },
-  { table: 'categories', label: 'Categories', titleKey: 'name', defaults: { name: 'New category', sort: 0 },
-    fields: [{ key: 'name', label: 'Name' }] },
-  { table: 'services', label: 'Services', titleKey: 'title', defaults: { title: 'New service', description: '', icon: 'box', sort: 0 },
-    fields: [{ key: 'title', label: 'Title' }, { key: 'description', label: 'Description', type: 'textarea' }, { key: 'icon', label: 'Icon (box, map, sun, code)' }] },
-  { table: 'tools', label: 'Toolbelt', titleKey: 'name', defaults: { name: 'New tool', level: 50, note: '', icon: 'cube', sort: 0 },
-    fields: [{ key: 'name', label: 'Name' }, { key: 'level', label: 'Level (0-100)', type: 'number' }, { key: 'note', label: 'Description', type: 'textarea' }, { key: 'icon', label: 'Icon (cube, shapes, sun, map, code, layers, brush, hammer, sparkles)' }] },
-  { table: 'stats', label: 'Stats', titleKey: 'label', defaults: { label: 'Stat', value: '0', sort: 0 },
-    fields: [{ key: 'label', label: 'Label' }, { key: 'value', label: 'Value' }] },
-  { table: 'timeline', label: 'Timeline', titleKey: 'title', defaults: { year: '', title: 'New milestone', text: '', sort: 0 },
-    fields: [{ key: 'year', label: 'Year' }, { key: 'title', label: 'Title' }, { key: 'text', label: 'Text', type: 'textarea' }] },
-  { table: 'faq', label: 'FAQ', titleKey: 'q', defaults: { q: 'New question', a: '', sort: 0 },
-    fields: [{ key: 'q', label: 'Question' }, { key: 'a', label: 'Answer', type: 'textarea' }] },
-  { table: 'links', label: 'Links', titleKey: 'label', defaults: { type: 'other', label: 'New link', url: 'https://', note: '', sort: 0 },
-    fields: [{ key: 'type', label: 'Type (discord, email, roblox, x, github, linkedin)' }, { key: 'label', label: 'Label' }, { key: 'url', label: 'URL' }, { key: 'note', label: 'Contact window message (optional)', type: 'textarea' }] },
-  { table: 'availability', label: 'Availability', titleKey: 'response', singleton: true, defaults: { open: true, response: '', preferred: 'discord' },
-    fields: [{ key: 'open', label: 'Open for commissions', type: 'bool' }, { key: 'response', label: 'Response time text' }, { key: 'preferred', label: 'Preferred channel type (discord, email...)' }] },
-  { table: 'profile', label: 'About', titleKey: 'name', singleton: true, defaults: { name: 'Your name', tagline: '', bio: '', avatar: '', skills: '', facts: '' },
-    fields: [{ key: 'name', label: 'Name' }, { key: 'tagline', label: 'Tagline' }, { key: 'bio', label: 'Bio', type: 'textarea' }, { key: 'avatar', label: 'Avatar', type: 'image' }, { key: 'skills', label: 'Skills (comma separated)' }, { key: 'facts', label: 'Fun facts (comma separated)' }] },
-  { table: 'studio', label: 'Studio', titleKey: 'name', singleton: true, defaults: { name: 'WARE STUDIOS', tagline: '', intro: '', logo: '', ceo_note: '', join_text: '' },
-    fields: [{ key: 'name', label: 'Studio name' }, { key: 'tagline', label: 'Tagline' }, { key: 'intro', label: 'Introduction', type: 'textarea' }, { key: 'logo', label: 'Logo', type: 'image' }, { key: 'ceo_note', label: 'CEO note' }, { key: 'join_text', label: 'Call to action text', type: 'textarea' }] },
-  { table: 'studio_stats', label: 'Studio stats', titleKey: 'label', defaults: { label: 'Stat', value: '0', sort: 0 },
-    fields: [{ key: 'label', label: 'Label' }, { key: 'value', label: 'Value (numbers count up, e.g. 50+)' }] },
-  { table: 'studio_steps', label: 'Studio process', titleKey: 'title', defaults: { title: 'New step', text: '', sort: 0 },
-    fields: [{ key: 'title', label: 'Title' }, { key: 'text', label: 'Text', type: 'textarea' }] },
-  { table: 'studio_services', label: 'Studio services', titleKey: 'title', defaults: { title: 'New service', description: '', icon: 'box', sort: 0 },
-    fields: [{ key: 'title', label: 'Title' }, { key: 'description', label: 'Description', type: 'textarea' }, { key: 'icon', label: 'Icon (box, map, sun, code)' }] },
-  { table: 'team', label: 'Team', titleKey: 'name', defaults: { name: 'New member', role: '', bio: '', avatar: '', skills: '', link: '', ceo: false, sort: 0 },
-    fields: [{ key: 'name', label: 'Name' }, { key: 'role', label: 'Role' }, { key: 'bio', label: 'Bio', type: 'textarea' }, { key: 'avatar', label: 'Avatar', type: 'image' }, { key: 'skills', label: 'Skills (comma separated)' }, { key: 'link', label: 'Link (Discord, Roblox, portfolio...)' }, { key: 'ceo', label: 'CEO (shown first and larger)', type: 'bool' }] },
-  { table: 'site_texts', label: 'Texts', titleKey: 'key', defaults: { key: 'new_key', value: '' },
-    fields: [{ key: 'key', label: 'Key (hero_title, contact_intro)' }, { key: 'value', label: 'Value', type: 'textarea' }] },
-]
+const countOf = (c: Content, t: Table): number | undefined => ({
+  works: c.works.length, categories: c.categories.length, services: c.services.length, tools: c.tools.length, stats: c.stats.length,
+  timeline: c.timeline.length, links: c.links.length, faq: c.faq.length, team: c.team.length, studio_stats: c.studioStats.length,
+  studio_steps: c.studioSteps.length, studio_services: c.studioServices.length,
+} as Partial<Record<Table, number>>)[t]
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -56,161 +29,108 @@ function Login() {
     setErr(error?.message ?? '')
   }
   return (
-    <form onSubmit={submit} className="mx-auto mt-24 w-full max-w-sm space-y-3 rounded border border-studio-border bg-studio-panel p-6">
-      <h1 className="text-lg font-semibold">Admin login</h1>
-      <input className="field" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      <input className="field" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      {err && <p className="text-sm text-red-400">{err}</p>}
-      <button className="btn-primary w-full">Sign in</button>
-    </form>
+    <div className="flex h-full items-center justify-center p-4">
+      <form onSubmit={submit} className="w-full max-w-sm space-y-4 rounded-md border border-studio-border bg-studio-panel p-6">
+        <div>
+          <div className="font-mono text-xs font-bold tracking-[0.18em] text-white">SWEETKANMI</div>
+          <h1 className="mt-2 text-xl font-semibold text-white">Admin sign in</h1>
+        </div>
+        <input className="field" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
+        <input className="field" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        {err && <p className="text-sm text-red-400">{err}</p>}
+        <button className="btn-primary w-full !py-2">Sign in</button>
+      </form>
+    </div>
   )
 }
 
-function Editor({ entity }: { entity: Entity }) {
-  const { refresh } = useContent()
-  const [rows, setRows] = useState<Row[]>([])
-  const [cats, setCats] = useState<Row[]>([])
-  const [sel, setSel] = useState<Row | null>(null)
-  const [busy, setBusy] = useState(false)
-  const [msg, setMsg] = useState('')
-  const key = pkOf(entity.table)
-  const sortable = !entity.singleton && 'sort' in entity.defaults
-  const dragFrom = useRef<number | null>(null)
-  const [over, setOver] = useState<number | null>(null)
+function PublishCard() {
+  const [copied, setCopied] = useState(false)
+  const cmd = 'git add -A && git commit -m "Update content" && git push'
+  if (repo.kind === 'supabase') return <p className="px-3 text-xs leading-snug text-studio-dim">Changes go live immediately.</p>
+  return (
+    <div className="m-3 rounded-md border border-studio-border bg-studio-bg/50 p-3 text-xs leading-snug text-studio-dim">
+      <div className="mb-1 font-semibold text-studio-text">Publishing</div>
+      Edits are saved to <code className="text-studio-accent">src/data/content.json</code> and <code className="text-studio-accent">public/uploads</code>. Commit them to publish.
+      <button className="mt-2 flex w-full items-center justify-between gap-2 rounded border border-studio-border px-2 py-1 font-mono text-[10px] text-studio-text hover:border-studio-accent"
+        onClick={async () => { try { await navigator.clipboard.writeText(cmd); setCopied(true); setTimeout(() => setCopied(false), 1500) } catch { /* clipboard unavailable */ } }}>
+        <span className="truncate">{cmd}</span>{copied ? <Check size={12} className="shrink-0 text-studio-ok" /> : <Copy size={12} className="shrink-0" />}
+      </button>
+    </div>
+  )
+}
 
-  const load = async () => {
-    const list = await repo.list(entity.table)
-    setRows(sortable ? [...list].sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0)) : list)
-    if (entity.table === 'works') setCats(await repo.list('categories'))
+function Shell({ needsLogin }: { needsLogin: boolean }) {
+  const { content } = useContent()
+  const initial = (): Tab => (window.location.hash.slice(1) as Tab) || 'overview'
+  const [tab, setTab] = useState<Tab>(initial)
+  const [dirty, setDirty] = useState(false)
+  const [target, setTarget] = useState<Tab | null>(null)
+  const onDirtyChange = useCallback((d: boolean) => setDirty(d), [])
+
+  const go = (t: Tab) => {
+    if (t === tab) return
+    if (dirty) return setTarget(t)
+    setTab(t)
   }
-  const run = async (fn: () => Promise<void>, ok: string) => {
-    setBusy(true)
-    try { await fn(); setMsg(ok); await load(); await refresh(); return true }
-    catch (e) { setMsg((e as Error).message); return false }
-    finally { setBusy(false) }
-  }
+  useEffect(() => { window.history.replaceState(null, '', `#${tab}`) }, [tab])
   useEffect(() => {
-    setMsg('')
-    void load().then(() => undefined)
-    // singleton tables open straight into their only row
-    if (entity.singleton) void repo.list(entity.table).then((l) => setSel(l[0] ? { ...l[0], __saved: true } : { ...entity.defaults }))
-    else setSel(null)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entity.table])
+    const warn = (e: BeforeUnloadEvent) => { if (dirty) e.preventDefault() }
+    window.addEventListener('beforeunload', warn)
+    return () => window.removeEventListener('beforeunload', warn)
+  }, [dirty])
 
-  const save = async () => {
-    if (!sel) return
-    const { __saved, ...payload } = sel
-    if (await run(() => repo.upsert(entity.table, payload), 'Saved.') && !entity.singleton) setSel(null)
-  }
-  const remove = async () => {
-    if (!sel?.__saved || !confirm('Delete this item?')) return
-    if (await run(() => repo.remove(entity.table, sel[key]), 'Deleted.')) setSel(null)
-  }
-  const reorder = async (from: number, to: number) => {
-    if (from === to || to < 0 || to >= rows.length) return
-    const next = [...rows]
-    next.splice(to, 0, next.splice(from, 1)[0])
-    setRows(next.map((r, i) => ({ ...r, sort: i })))
-    await run(() => repo.reorder(entity.table, next.map((r) => r.id)), 'Order saved.')
-  }
-  const set = (k: string, v: unknown) => setSel((s) => (s ? { ...s, [k]: v } : s))
-  const moveImage = (k: string, i: number, d: number) =>
-    setSel((s) => {
-      if (!s) return s
-      const arr = [...(s[k] ?? [])]
-      const j = i + d
-      if (j < 0 || j >= arr.length) return s
-      ;[arr[i], arr[j]] = [arr[j], arr[i]]
-      return { ...s, [k]: arr }
-    })
-  const addFiles = async (k: string, files: FileList | null, multi: boolean) => {
-    if (!files?.length) return
-    setBusy(true)
-    try {
-      const urls = await Promise.all([...files].map((f) => repo.uploadImage(f)))
-      setSel((s) => (s ? { ...s, [k]: multi ? [...(s[k] ?? []), ...urls] : urls[0] } : s))
-    } catch (e) { setMsg((e as Error).message) }
-    setBusy(false)
-  }
+  const entity = entities.find((e) => e.table === tab)
 
   return (
-    <div className={`grid gap-4 ${entity.singleton ? '' : 'md:grid-cols-[16rem_1fr]'}`}>
-      {!entity.singleton && (
-        <div className="space-y-1">
-          <button className="btn-primary w-full" onClick={() => setSel({ ...entity.defaults, ...(sortable ? { sort: rows.length } : {}) })}>+ Add</button>
-          {rows.map((r, idx) => (
-            <div key={r[key]}
-              draggable={sortable}
-              onDragStart={() => { dragFrom.current = idx }}
-              onDragOver={(e) => { if (sortable) { e.preventDefault(); setOver(idx) } }}
-              onDragLeave={() => setOver((o) => (o === idx ? null : o))}
-              onDrop={() => { setOver(null); if (dragFrom.current !== null) void reorder(dragFrom.current, idx); dragFrom.current = null }}
-              onDragEnd={() => { dragFrom.current = null; setOver(null) }}
-              className={`flex items-center gap-1 rounded ${over === idx ? 'outline outline-1 outline-studio-accent' : ''} ${sel?.[key] === r[key] ? 'bg-studio-select' : 'bg-studio-panel hover:bg-studio-panel2'}`}>
-              {sortable && <GripVertical size={14} className="ml-1 shrink-0 cursor-grab text-studio-dim" aria-hidden />}
-              <button onClick={() => setSel({ ...r, __saved: true })} className="min-w-0 flex-1 truncate px-1 py-1 text-left text-sm">
-                {r[entity.titleKey] || '(untitled)'}
-              </button>
-              {sortable && (
-                <>
-                  <button aria-label="Move up" disabled={idx === 0} onClick={() => void reorder(idx, idx - 1)} className="p-1 text-studio-dim hover:text-white disabled:opacity-25"><ArrowUp size={14} /></button>
-                  <button aria-label="Move down" disabled={idx === rows.length - 1} onClick={() => void reorder(idx, idx + 1)} className="p-1 text-studio-dim hover:text-white disabled:opacity-25"><ArrowDown size={14} /></button>
-                </>
-              )}
-            </div>
-          ))}
+    <div className="flex h-full flex-col">
+      <header className="flex h-11 shrink-0 items-center gap-3 border-b border-studio-border bg-studio-panel px-4">
+        <span className="font-mono text-sm font-bold tracking-[0.18em] text-white">SWEETKANMI</span>
+        <span className="rounded border border-studio-border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-studio-dim">Admin</span>
+        <span className="hidden rounded border border-studio-border px-2 py-0.5 font-mono text-[10px] text-studio-dim sm:inline">
+          {repo.kind === 'local' ? 'Local files' : 'Supabase'}
+        </span>
+        <div className="ml-auto flex items-center gap-2">
+          {needsLogin && <button className="btn flex items-center gap-1.5 !py-1" onClick={() => supabase!.auth.signOut()}><LogOut size={14} />Sign out</button>}
+          <Link to="/" className="btn flex items-center gap-1.5 !py-1">View site <ExternalLink size={14} /></Link>
         </div>
-      )}
-      <div>
-        {sel ? (
-          <div className="space-y-3">
-            {entity.fields.map((f) => (
-              <label key={f.key} className="block text-sm">
-                <span className="text-studio-dim">{f.label}</span>
-                {f.type === 'textarea' ? <textarea className="field mt-1 h-28" value={sel[f.key] ?? ''} onChange={(e) => set(f.key, e.target.value)} />
-                : f.type === 'number' ? <input className="field mt-1" type="number" value={sel[f.key] ?? 0} onChange={(e) => set(f.key, Number(e.target.value))} />
-                : f.type === 'bool' ? <input className="mt-1 block" type="checkbox" checked={!!sel[f.key]} onChange={(e) => set(f.key, e.target.checked)} />
-                : f.type === 'category' ? (
-                  <select className="field mt-1" value={sel[f.key] ?? ''} onChange={(e) => set(f.key, e.target.value || null)}>
-                    <option value="">- none -</option>
-                    {cats.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-                  </select>
-                ) : f.type === 'images' ? (
-                  <div className="mt-1">
-                    <input type="file" accept="image/*" multiple onChange={(e) => addFiles(f.key, e.target.files, true)} />
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {(sel[f.key] ?? []).map((src: string, i: number) => (
-                        <div key={src + i} className="relative">
-                          <img src={src} alt="" className="h-20 rounded border border-studio-border" />
-                          <button type="button" className="absolute right-0 top-0 bg-black/70 px-1 text-xs"
-                            onClick={() => set(f.key, sel[f.key].filter((_: string, j: number) => j !== i))}>x</button>
-                          {i === 0 && <span className="absolute left-0 top-0 bg-studio-accent px-1 text-[10px] text-black">cover</span>}
-                          <div className="absolute inset-x-0 bottom-0 flex justify-between bg-black/60">
-                            <button type="button" aria-label="Move image left" disabled={i === 0} onClick={() => moveImage(f.key, i, -1)} className="px-1 disabled:opacity-25"><ChevronLeft size={14} /></button>
-                            <button type="button" aria-label="Move image right" disabled={i === sel[f.key].length - 1} onClick={() => moveImage(f.key, i, 1)} className="px-1 disabled:opacity-25"><ChevronRight size={14} /></button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : f.type === 'image' ? (
-                  <div className="mt-1">
-                    <input type="file" accept="image/*" onChange={(e) => addFiles(f.key, e.target.files, false)} />
-                    {sel[f.key] && <img src={sel[f.key]} alt="" className="mt-2 h-20 rounded border border-studio-border" />}
-                  </div>
-                ) : <input className="field mt-1" value={sel[f.key] ?? ''} onChange={(e) => set(f.key, e.target.value)} />}
-              </label>
+      </header>
+
+      <div className="flex min-h-0 flex-1">
+        <nav aria-label="Admin sections" className="flex w-56 shrink-0 flex-col overflow-y-auto border-r border-studio-border bg-studio-panel/60">
+          <div className="flex-1 py-2">
+            <button onClick={() => go('overview')} className={`mx-2 mb-1 flex w-[calc(100%-1rem)] items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors ${tab === 'overview' ? 'bg-studio-select text-white' : 'text-studio-text hover:bg-studio-panel2'}`}>
+              <LayoutDashboard size={15} className={tab === 'overview' ? 'text-studio-accent' : 'text-studio-dim'} />Overview
+            </button>
+            {navGroups.map((g) => (
+              <div key={g.label} className="mt-3">
+                <div className="px-4 pb-1 font-mono text-[10px] uppercase tracking-widest text-studio-dim/70">{g.label}</div>
+                {g.tables.map((t) => {
+                  const e = entities.find((x) => x.table === t)!
+                  const n = countOf(content, t)
+                  const active = tab === t
+                  return (
+                    <button key={t} onClick={() => go(t)} aria-current={active ? 'page' : undefined}
+                      className={`mx-2 flex w-[calc(100%-1rem)] items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors ${active ? 'bg-studio-select text-white' : 'text-studio-text hover:bg-studio-panel2'}`}>
+                      <e.icon size={15} className={active ? 'text-studio-accent' : 'text-studio-dim'} />
+                      <span className="flex-1 text-left">{e.label}</span>
+                      {n !== undefined && <span className="font-mono text-[10px] text-studio-dim">{n}</span>}
+                    </button>
+                  )
+                })}
+              </div>
             ))}
-            <div className="flex gap-2">
-              <button className="btn-primary" disabled={busy} onClick={save}>{sel.__saved || entity.singleton ? 'Save' : 'Create'}</button>
-              {sel.__saved && !entity.singleton && <button className="btn" onClick={remove}>Delete</button>}
-              {!entity.singleton && <button className="btn" onClick={() => setSel(null)}>Cancel</button>}
-            </div>
           </div>
-        ) : <p className="text-sm text-studio-dim">Select an item or add a new one.</p>}
-        {msg && <p className="mt-3 text-sm text-studio-accent">{msg}</p>}
+          <PublishCard />
+        </nav>
+
+        <main className="min-w-0 flex-1 bg-studio-bg">
+          {tab === 'overview' || !entity ? <Overview go={go} /> : <CollectionEditor key={tab} entity={entity} onDirtyChange={onDirtyChange} />}
+        </main>
       </div>
+
+      <ConfirmModal open={!!target} title="Discard unsaved changes?" text="You have edits that have not been saved. If you leave this section they will be lost." confirmLabel="Discard and leave" danger
+        onCancel={() => setTarget(null)} onConfirm={() => { if (target) { setDirty(false); setTab(target) } setTarget(null) }} />
     </div>
   )
 }
@@ -219,7 +139,6 @@ export default function Admin() {
   const needsLogin = repo.kind === 'supabase'
   const [session, setSession] = useState<Session | null>(null)
   const [ready, setReady] = useState(!needsLogin)
-  const [tab, setTab] = useState<Table>(entities[0].table)
 
   useEffect(() => {
     if (!needsLogin || !supabase) return
@@ -230,23 +149,5 @@ export default function Admin() {
 
   if (!ready) return null
   if (needsLogin && !session) return <Login />
-
-  return (
-    <div className="mx-auto max-w-5xl p-4">
-      <div className="mb-4 flex items-center gap-2">
-        <Link to="/" className="text-studio-accent">&larr; Site</Link>
-        <h1 className="ml-2 text-lg font-semibold">Admin</h1>
-        <span className="rounded border border-studio-border px-2 py-0.5 font-mono text-xs text-studio-dim">
-          {repo.kind === 'local' ? 'local files: src/data/content.json + public/uploads' : 'Supabase'}
-        </span>
-        {needsLogin && <button className="btn ml-auto" onClick={() => supabase!.auth.signOut()}>Sign out</button>}
-      </div>
-      <div className="mb-4 flex flex-wrap gap-1">
-        {entities.map((e) => (
-          <button key={e.table} onClick={() => setTab(e.table)} className={`rounded px-3 py-1 text-sm ${tab === e.table ? 'bg-studio-select' : 'bg-studio-panel hover:bg-studio-panel2'}`}>{e.label}</button>
-        ))}
-      </div>
-      <Editor key={tab} entity={entities.find((e) => e.table === tab)!} />
-    </div>
-  )
+  return <ToastProvider><Shell needsLogin={needsLogin} /></ToastProvider>
 }

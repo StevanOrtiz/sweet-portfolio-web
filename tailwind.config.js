@@ -19,6 +19,7 @@ export default {
           mint: '#8cc8e8',
           rose: '#b4bfcc',
           ok: '#7fd4a0',
+          warn: '#d9b36a',
         },
       },
       fontFamily: {

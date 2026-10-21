@@ -6,7 +6,7 @@ export interface Repo {
   label: string
   loadAll(): Promise<Content | null>
   list(table: Table): Promise<Row[]>
-  upsert(table: Table, row: Row): Promise<void>
+  upsert(table: Table, row: Row): Promise<Row>
   remove(table: Table, id: string): Promise<void>
   reorder(table: Table, ids: string[]): Promise<void>
   uploadImage(file: File): Promise<string>

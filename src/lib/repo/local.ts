@@ -29,6 +29,7 @@ export const localRepo: Repo = {
     if (i >= 0) db[table][i] = next
     else db[table].push(next)
     await save(db)
+    return next
   },
   async remove(table, id) {
     const db = await readDb()

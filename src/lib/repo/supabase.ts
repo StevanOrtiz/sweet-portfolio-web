@@ -28,8 +28,9 @@ export const supabaseRepo: Repo = {
     const payload: Row = { ...row }
     // Seed ids from content.json are not valid UUIDs; let Postgres generate real ones for new rows.
     if (k === 'id' && !/^[0-9a-f-]{36}$/i.test(String(payload.id ?? ''))) delete payload.id
-    const { error } = await client().from(table).upsert(payload)
+    const { data, error } = await client().from(table).upsert(payload).select().single()
     if (error) throw error
+    return data as Row
   },
   async remove(table, id) {
     const { error } = await client().from(table).delete().eq(pkOf(table), id)

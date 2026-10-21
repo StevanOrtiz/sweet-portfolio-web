@@ -4,6 +4,7 @@ import type { Plugin } from 'vite'
 
 const MAX_BYTES = 25 * 1024 * 1024
 const IMAGE_EXT = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.avif'])
+const MIME: Record<string, string> = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.svg': 'image/svg+xml', '.avif': 'image/avif' }
 
 const readBody = (req: NodeJS.ReadableStream) =>
   new Promise<Buffer>((resolve, reject) => {
@@ -28,6 +29,19 @@ export default function localCms(): Plugin {
     name: 'local-cms',
     apply: 'serve',
     configureServer(server) {
+      // New uploads are not in Vite's public-file index (the folder is not watched), so serve them straight from disk.
+      server.middlewares.use('/uploads', async (req, res, next) => {
+        try {
+          const name = path.basename(decodeURIComponent((req.url ?? '').split('?')[0]))
+          const type = MIME[path.extname(name).toLowerCase()]
+          if (!name || !type) return next()
+          const data = await readFile(path.join(uploadDir, name))
+          res.setHeader('Content-Type', type)
+          res.setHeader('Cache-Control', 'no-cache')
+          res.end(data)
+        } catch { next() }
+      })
+
       server.middlewares.use('/__cms', async (req, res) => {
         const send = (code: number, body: unknown, type = 'application/json') => {
           res.statusCode = code
