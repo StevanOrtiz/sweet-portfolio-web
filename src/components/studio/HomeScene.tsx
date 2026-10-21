@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useContent } from '../../lib/content'
 import { accents } from '../../lib/palette'
 import Sky from './Sky'
-import Island from './Island'
+import CrystalStage from './CrystalStage'
 import Hotbar from './Hotbar'
 
 const rise = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } } }
@@ -57,7 +57,7 @@ export default function HomeScene({ onSelect }: { onSelect: (id: string) => void
         </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.92, y: 24 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }} className="flex justify-center">
-          <Island name={p.name} role="Builder" />
+          <CrystalStage name={p.name} role="Builder" />
         </motion.div>
       </div>
 

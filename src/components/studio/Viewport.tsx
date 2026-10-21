@@ -155,7 +155,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
     <div ref={frame} onMouseMove={onMove} className="spot relative h-full">
       <div className={`relative z-[1] h-full overflow-y-auto ${selected === 'home' ? '' : 'grid-floor'}`}>
         <AnimatePresence mode="wait">
-          <motion.div key={selected} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="min-h-full">
+          <motion.div key={selected} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className={selected === 'home' ? 'h-full' : 'min-h-full'}>
             {body}
           </motion.div>
         </AnimatePresence>
