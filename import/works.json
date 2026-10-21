@@ -1,0 +1,447 @@
+{
+  "works": [
+    {
+      "title": "Desert Oasis Ruins",
+      "description": "Sunlit sandstone ruins with palms, waterfalls and cat-emblem walls, plus an aerial layout view.",
+      "category": "Environments",
+      "images": [
+        "/uploads/desert-oasis-ruins-1.webp",
+        "/uploads/desert-oasis-ruins-2.webp",
+        "/uploads/desert-oasis-ruins-3.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "desert, egyptian, ruins, palms, oasis",
+      "published": true
+    },
+    {
+      "title": "Rust Yard Containers",
+      "description": "Stacked shipping containers and a yellow loader in snowy and toxic-red moods, with a top-down layout.",
+      "category": "Environments",
+      "images": [
+        "/uploads/rust-yard-containers-1.webp",
+        "/uploads/rust-yard-containers-2.webp",
+        "/uploads/rust-yard-containers-3.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "containers, industrial, snow, sci-fi, lighting",
+      "published": true
+    },
+    {
+      "title": "Island Temple Cliffs",
+      "description": "Cliffside island with a red-roofed temple, palm trees and flickering fires under a hazy sky.",
+      "category": "Environments",
+      "images": [
+        "/uploads/island-temple-cliffs-1.webp",
+        "/uploads/island-temple-cliffs-2.webp",
+        "/uploads/island-temple-cliffs-3.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "island, temple, palms, fire, atmosphere",
+      "published": true
+    },
+    {
+      "title": "Roman Courtyard",
+      "description": "Colonnaded courtyard with red marble statues and ornate tilework under a warm, cloudy sky.",
+      "category": "Environments",
+      "images": [
+        "/uploads/roman-courtyard-1.webp",
+        "/uploads/roman-courtyard-2.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "roman, courtyard, statues, architecture, red",
+      "published": true
+    },
+    {
+      "title": "Crimson Command Station",
+      "description": "Dark sci-fi interiors lit in red: command rooms, a central stage and rows of glowing seats.",
+      "category": "Environments",
+      "images": [
+        "/uploads/crimson-command-station-1.webp",
+        "/uploads/crimson-command-station-2.webp",
+        "/uploads/crimson-command-station-3.webp",
+        "/uploads/crimson-command-station-4.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "sci-fi, interior, red, lighting, station",
+      "published": true
+    },
+    {
+      "title": "Neon Cargo Hangar",
+      "description": "A moody hangar full of stacked crates, yellow railings and purple-blue accent lighting.",
+      "category": "Environments",
+      "images": [
+        "/uploads/neon-cargo-hangar-1.webp",
+        "/uploads/neon-cargo-hangar-2.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "hangar, sci-fi, cargo, neon, interior",
+      "published": true
+    },
+    {
+      "title": "Azure Citadel",
+      "description": "Blue industrial sci-fi complex with cables, pipes, yellow rails and glowing panels, inside and out.",
+      "category": "Environments",
+      "images": [
+        "/uploads/azure-citadel-1.webp",
+        "/uploads/azure-citadel-2.webp",
+        "/uploads/azure-citadel-3.png",
+        "/uploads/azure-citadel-4.png",
+        "/uploads/azure-citadel-5.webp",
+        "/uploads/azure-citadel-6.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "sci-fi, blue, industrial, citadel, cables",
+      "published": true
+    },
+    {
+      "title": "Fogbound Outpost",
+      "description": "Misty industrial base with red-trimmed buildings, radar structures and soft blue haze.",
+      "category": "Environments",
+      "images": [
+        "/uploads/fogbound-outpost-1.png",
+        "/uploads/fogbound-outpost-2.png",
+        "/uploads/fogbound-outpost-3.png",
+        "/uploads/fogbound-outpost-4.png"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "fog, outpost, industrial, atmosphere, sci-fi",
+      "published": true
+    },
+    {
+      "title": "Ancient Temple Grounds",
+      "description": "Weathered stone temple, tree-lined terraces and torch-lit halls in a dusty golden haze.",
+      "category": "Environments",
+      "images": [
+        "/uploads/ancient-temple-grounds-1.webp",
+        "/uploads/ancient-temple-grounds-2.webp",
+        "/uploads/ancient-temple-grounds-3.png"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "temple, ancient, trees, torches, atmosphere",
+      "published": true
+    },
+    {
+      "title": "Neon Sakura Arena",
+      "description": "Cherry blossom trees, torii gates and glowing red trims around a sci-fi shrine under a pink sun.",
+      "category": "Environments",
+      "images": [
+        "/uploads/neon-sakura-arena-1.webp",
+        "/uploads/neon-sakura-arena-2.webp",
+        "/uploads/neon-sakura-arena-3.webp",
+        "/uploads/neon-sakura-arena-4.webp",
+        "/uploads/neon-sakura-arena-5.webp",
+        "/uploads/neon-sakura-arena-6.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "sakura, shrine, neon, japanese, sci-fi",
+      "published": true
+    },
+    {
+      "title": "Frontier Outpost Town",
+      "description": "Small coastal town of blue-roofed huts, radar dishes and supply crates beneath mountains.",
+      "category": "Environments",
+      "images": [
+        "/uploads/frontier-outpost-town-1.webp",
+        "/uploads/frontier-outpost-town-2.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "outpost, town, coastal, mountains, sci-fi",
+      "published": true
+    },
+    {
+      "title": "Stilt Village",
+      "description": "Wooden stilt village with palms, rope bridges and campfires in warm desert light, plus an aerial view.",
+      "category": "Environments",
+      "images": [
+        "/uploads/stilt-village-1.webp",
+        "/uploads/stilt-village-2.webp",
+        "/uploads/stilt-village-3.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "village, wood, desert, palms, bridges",
+      "published": true
+    },
+    {
+      "title": "Armored Transport Tank",
+      "description": "Heavily detailed armored transport vehicle sculpted in grey, shown from several angles.",
+      "category": "Props & Assets",
+      "images": [
+        "/uploads/armored-transport-tank-1.png",
+        "/uploads/armored-transport-tank-2.png",
+        "/uploads/armored-transport-tank-3.png",
+        "/uploads/armored-transport-tank-4.png"
+      ],
+      "tools": "",
+      "tags": "vehicle, tank, hard-surface, sci-fi, sculpt",
+      "published": true
+    },
+    {
+      "title": "Sci-Fi Shotgun",
+      "description": "Twin-barrel futuristic shotgun with ribbed details and vents, shown from multiple angles.",
+      "category": "Props & Assets",
+      "images": [
+        "/uploads/sci-fi-shotgun-1.png",
+        "/uploads/sci-fi-shotgun-2.png",
+        "/uploads/sci-fi-shotgun-3.png",
+        "/uploads/sci-fi-shotgun-4.png"
+      ],
+      "tools": "",
+      "tags": "weapon, shotgun, sci-fi, hard-surface, model",
+      "published": true
+    },
+    {
+      "title": "Heavy Machine Gun",
+      "description": "Chunky belt-fed machine gun with a drum magazine and long barrel, untextured model.",
+      "category": "Props & Assets",
+      "images": [
+        "/uploads/heavy-machine-gun-1.png"
+      ],
+      "tools": "",
+      "tags": "weapon, machine gun, hard-surface, model",
+      "published": true
+    },
+    {
+      "title": "Compact SMG",
+      "description": "Compact sci-fi submachine gun with a suppressor-style barrel and angular body.",
+      "category": "Props & Assets",
+      "images": [
+        "/uploads/compact-smg-1.png"
+      ],
+      "tools": "",
+      "tags": "weapon, smg, sci-fi, hard-surface, model",
+      "published": true
+    },
+    {
+      "title": "Canyon Research Base",
+      "description": "Orange and grey research station tucked in a canyon with waterfalls, walkways and glowing blue lights.",
+      "category": "Environments",
+      "images": [
+        "/uploads/canyon-research-base-1.webp",
+        "/uploads/canyon-research-base-2.webp",
+        "/uploads/canyon-research-base-3.webp",
+        "/uploads/canyon-research-base-4.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "canyon, base, waterfalls, sci-fi, orange",
+      "published": true
+    },
+    {
+      "title": "Command Center Interior",
+      "description": "Bright white sci-fi interiors with cyan screens, sunken consoles and yellow safety rails.",
+      "category": "Environments",
+      "images": [
+        "/uploads/command-center-interior-1.webp",
+        "/uploads/command-center-interior-2.webp",
+        "/uploads/command-center-interior-3.webp",
+        "/uploads/command-center-interior-4.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "sci-fi, interior, command center, cyan, lighting",
+      "published": true
+    },
+    {
+      "title": "Night Harbor Shrine",
+      "description": "Snowy night harbor with a neon torii gate, forklifts and cargo crates by the water.",
+      "category": "Environments",
+      "images": [
+        "/uploads/night-harbor-shrine-1.webp",
+        "/uploads/night-harbor-shrine-2.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "night, harbor, neon, snow, shrine",
+      "published": true
+    },
+    {
+      "title": "Industrial Docks",
+      "description": "Gritty docks of cranes, cables and dark interiors accented with yellow-black hazard trims.",
+      "category": "Environments",
+      "images": [
+        "/uploads/industrial-docks-1.webp",
+        "/uploads/industrial-docks-2.webp",
+        "/uploads/industrial-docks-3.webp",
+        "/uploads/industrial-docks-4.webp",
+        "/uploads/industrial-docks-5.png"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "industrial, docks, cranes, hazard, interior",
+      "published": true
+    },
+    {
+      "title": "Cliffside Modern House",
+      "description": "Glass-and-concrete house on a misty cliff, with a stylish dark interior and cyan neon lines.",
+      "category": "Environments",
+      "images": [
+        "/uploads/cliffside-modern-house-1.webp",
+        "/uploads/cliffside-modern-house-2.webp",
+        "/uploads/cliffside-modern-house-3.webp",
+        "/uploads/cliffside-modern-house-4.webp",
+        "/uploads/cliffside-modern-house-5.webp",
+        "/uploads/cliffside-modern-house-6.webp",
+        "/uploads/cliffside-modern-house-7.png",
+        "/uploads/cliffside-modern-house-8.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "modern, house, architecture, cliff, interior",
+      "published": true
+    },
+    {
+      "title": "Mountain Frontier Town",
+      "description": "Mountain-backed town with a domed capitol, a bank lobby, a bus stop and parking lot.",
+      "category": "Environments",
+      "images": [
+        "/uploads/mountain-frontier-town-1.webp",
+        "/uploads/mountain-frontier-town-2.webp",
+        "/uploads/mountain-frontier-town-3.webp",
+        "/uploads/mountain-frontier-town-4.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "town, city, architecture, bank, mountains",
+      "published": true
+    },
+    {
+      "title": "Alien Highlands",
+      "description": "Pine-covered highlands with floating glowing orbs, light beams and sleek beige interiors.",
+      "category": "Environments",
+      "images": [
+        "/uploads/alien-highlands-1.webp",
+        "/uploads/alien-highlands-2.webp",
+        "/uploads/alien-highlands-3.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "alien, highlands, beams, fantasy, sci-fi",
+      "published": true
+    },
+    {
+      "title": "Green Neon Citadel",
+      "description": "Dark cyber citadel with glowing green glyphs, skull faces and towers above the clouds, some on fire.",
+      "category": "Environments",
+      "images": [
+        "/uploads/green-neon-citadel-1.webp",
+        "/uploads/green-neon-citadel-2.png",
+        "/uploads/green-neon-citadel-3.webp",
+        "/uploads/green-neon-citadel-4.webp",
+        "/uploads/green-neon-citadel-5.webp",
+        "/uploads/green-neon-citadel-6.webp",
+        "/uploads/green-neon-citadel-7.webp",
+        "/uploads/green-neon-citadel-8.webp",
+        "/uploads/green-neon-citadel-9.webp",
+        "/uploads/green-neon-citadel-10.png",
+        "/uploads/green-neon-citadel-11.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "cyberpunk, neon, green, citadel, towers",
+      "published": true
+    },
+    {
+      "title": "Crimson Neon Night City",
+      "description": "Night-time city plaza outlined in red neon, with a glowing central gateway and tall skyline.",
+      "category": "Environments",
+      "images": [
+        "/uploads/crimson-neon-night-city-1.png",
+        "/uploads/crimson-neon-night-city-2.png",
+        "/uploads/crimson-neon-night-city-3.png"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "night, city, neon, red, plaza",
+      "published": true
+    },
+    {
+      "title": "WS Key Art",
+      "description": "Glowing WS emblem between a pink and a blue sports car, with a second shot featuring two characters.",
+      "category": "Branding",
+      "images": [
+        "/uploads/ws-key-art-1.webp",
+        "/uploads/ws-key-art-2.webp"
+      ],
+      "tools": "",
+      "tags": "key art, logo, cars, branding, characters",
+      "published": true
+    },
+    {
+      "title": "Kart Lineup",
+      "description": "Three stylized kart and buggy designs in a clean untextured presentation.",
+      "category": "Props & Assets",
+      "images": [
+        "/uploads/kart-lineup-1.webp"
+      ],
+      "tools": "",
+      "tags": "vehicles, karts, model, hard-surface, lineup",
+      "published": true
+    },
+    {
+      "title": "Grand Senate Hall",
+      "description": "Marble hall in red and white with golden statues, a long council table and a memorial corridor.",
+      "category": "Environments",
+      "images": [
+        "/uploads/grand-senate-hall-1.webp",
+        "/uploads/grand-senate-hall-2.webp",
+        "/uploads/grand-senate-hall-3.webp",
+        "/uploads/grand-senate-hall-4.webp",
+        "/uploads/grand-senate-hall-5.webp",
+        "/uploads/grand-senate-hall-6.webp",
+        "/uploads/grand-senate-hall-7.webp",
+        "/uploads/grand-senate-hall-8.webp",
+        "/uploads/grand-senate-hall-9.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "senate, hall, marble, statues, interior",
+      "published": true
+    },
+    {
+      "title": "Moonlit Palace Halls",
+      "description": "Dim blue palace corridors lit by lamps, braziers, chandeliers and glowing embers.",
+      "category": "Environments",
+      "images": [
+        "/uploads/moonlit-palace-halls-1.webp",
+        "/uploads/moonlit-palace-halls-2.webp",
+        "/uploads/moonlit-palace-halls-3.webp",
+        "/uploads/moonlit-palace-halls-4.webp",
+        "/uploads/moonlit-palace-halls-5.webp",
+        "/uploads/moonlit-palace-halls-6.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "palace, night, lanterns, interior, atmosphere",
+      "published": true
+    },
+    {
+      "title": "Reactor Core",
+      "description": "White and cyan reactor chamber with a glowing central column and curved wall panels.",
+      "category": "Environments",
+      "images": [
+        "/uploads/reactor-core-1.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "reactor, sci-fi, interior, cyan, clean",
+      "published": true
+    },
+    {
+      "title": "Ember Harbor",
+      "description": "Sun-bleached seaside town with palms, flooded streets, fire baskets and glowing windows.",
+      "category": "Environments",
+      "images": [
+        "/uploads/ember-harbor-1.webp",
+        "/uploads/ember-harbor-2.webp",
+        "/uploads/ember-harbor-3.webp",
+        "/uploads/ember-harbor-4.webp",
+        "/uploads/ember-harbor-5.webp",
+        "/uploads/ember-harbor-6.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "seaside, town, fire, palms, atmosphere",
+      "published": true
+    },
+    {
+      "title": "Golden Hour Cathedral",
+      "description": "Spired domed cathedral and gardens lit by sunset and glowing street lamps.",
+      "category": "Environments",
+      "images": [
+        "/uploads/golden-hour-cathedral-1.webp",
+        "/uploads/golden-hour-cathedral-2.webp",
+        "/uploads/golden-hour-cathedral-3.webp"
+      ],
+      "tools": "Roblox Studio",
+      "tags": "cathedral, golden hour, lamps, gardens, architecture",
+      "published": true
+    }
+  ]
+}
