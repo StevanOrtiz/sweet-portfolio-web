@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Box, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { useContent } from '../../lib/content'
@@ -65,18 +65,10 @@ type Props = { selected: string; onSelect: (id: string) => void; onLog: (t: stri
 export default function Viewport({ selected, onSelect, onLog }: Props) {
   const { content } = useContent()
   const [lightbox, setLightbox] = useState<{ work: Work; idx: number } | null>(null)
-  const frame = useRef<HTMLDivElement>(null)
   const published = content.works.filter((w) => w.published)
   const open = (w: Work, idx = 0) => setLightbox({ work: w, idx })
   const catIndex = (id: string | null) => Math.max(0, content.categories.findIndex((c) => c.id === id))
   const catName = (id: string | null) => content.categories.find((c) => c.id === id)?.name
-
-  const onMove = (e: React.MouseEvent) => {
-    const r = frame.current?.getBoundingClientRect()
-    if (!r || !frame.current) return
-    frame.current.style.setProperty('--mx', `${e.clientX - r.left}px`)
-    frame.current.style.setProperty('--my', `${e.clientY - r.top}px`)
-  }
 
   let body: React.ReactNode
   if (selected === 'home') {
@@ -156,7 +148,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
   }
 
   return (
-    <div ref={frame} onMouseMove={onMove} className="spot relative h-full">
+    <div className="relative h-full">
       {selected !== 'home' && <AmbientBg />}
       <div className={`relative z-[1] h-full overflow-y-auto ${selected === 'home' ? '' : 'grid-floor'}`}>
         <AnimatePresence mode="wait">

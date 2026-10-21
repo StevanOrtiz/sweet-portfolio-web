@@ -26,11 +26,6 @@ body::after {
 .btn-primary { @apply px-3 py-1 rounded text-sm font-semibold transition-all hover:brightness-110 disabled:opacity-50; background: #8cc8e8; color: #0b0d10; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
-.spot::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background: radial-gradient(460px circle at var(--mx, 50%) var(--my, 30%), #8cc8e80f, transparent 60%);
-}
-
 /* selection gizmo + hover handles */
 .gizmo { position: relative; display: inline-block; padding: 1rem 2rem; border: 1px solid #8cc8e8aa; }
 .gizmo i { position: absolute; width: 8px; height: 8px; background: #e8ecf1; border: 1px solid #8cc8e8; }
