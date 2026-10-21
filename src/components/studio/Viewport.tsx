@@ -11,6 +11,7 @@ import HomeScene from './HomeScene'
 import AboutView from './AboutView'
 import StudioView from './StudioView'
 import AmbientBg from './AmbientBg'
+import WorkDetail from './WorkDetail'
 import { serviceIcons } from './icons'
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } }
@@ -100,31 +101,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
     )
   } else if (selected.startsWith('work:')) {
     const w = published.find((x) => x.id === selected.slice(5))
-    const color = pick(catIndex(w?.category_id ?? null))
-    body = w ? (
-      <div className="p-4">
-        <button onClick={() => open(w)} className="group relative block w-full rounded-sm border border-studio-border hover:border-studio-accent">
-          <img src={w.images[0]} alt={w.title} className="w-full" />
-          <Handles />
-        </button>
-        <h2 className="mt-3 text-xl font-semibold">{w.title}</h2>
-        <div className="mt-2 flex flex-wrap gap-2 text-xs">
-          {catName(w.category_id) && <span className="rounded-sm px-1.5 py-0.5 font-mono text-black" style={{ background: color }}>{catName(w.category_id)}</span>}
-          {w.tools && <span className="rounded-sm border px-1.5 py-0.5" style={{ borderColor: `${accents.ice}66`, color: accents.ice }}>{w.tools}</span>}
-          {w.tags.split(',').map((t) => t.trim()).filter(Boolean).map((t) => (
-            <span key={t} className="rounded-sm border px-1.5 py-0.5" style={{ borderColor: `${accents.steel}55`, color: accents.steel }}>{t}</span>
-          ))}
-        </div>
-        <p className="mt-3 text-studio-dim">{w.description}</p>
-        {w.images.length > 1 && (
-          <div className="mt-3 grid grid-cols-4 gap-2">
-            {w.images.slice(1).map((src, i) => (
-              <button key={src} onClick={() => open(w, i + 1)} className="overflow-hidden rounded-sm border border-studio-border transition-all hover:-translate-y-0.5 hover:border-studio-accent"><img src={src} alt="" className="aspect-video w-full object-cover" /></button>
-            ))}
-          </div>
-        )}
-      </div>
-    ) : null
+    body = w ? <WorkDetail key={w.id} work={w} category={catName(w.category_id)} color={pick(catIndex(w.category_id))} onOpen={open} /> : null
   } else if (selected === 'services') {
     body = (
       <motion.div variants={stagger} initial="hidden" animate="show" className="grid gap-4 p-4 sm:grid-cols-2">
@@ -152,7 +129,7 @@ export default function Viewport({ selected, onSelect, onLog }: Props) {
       {selected !== 'home' && <AmbientBg />}
       <div className={`relative z-[1] h-full overflow-y-auto ${selected === 'home' ? '' : 'grid-floor'}`}>
         <AnimatePresence mode="wait">
-          <motion.div key={selected} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className={selected === 'home' ? 'h-full' : 'min-h-full'}>
+          <motion.div key={selected} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className={selected === 'home' || selected.startsWith('work:') ? 'h-full' : 'min-h-full'}>
             {body}
           </motion.div>
         </AnimatePresence>

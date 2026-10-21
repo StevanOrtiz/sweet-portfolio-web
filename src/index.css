@@ -72,3 +72,5 @@ body::after {
 @keyframes cloud { from { transform: translateX(-30vw); } to { transform: translateX(130vw); } }
 @keyframes twinkle { 50% { opacity: .25; } }
 .bob { animation: bob 6s ease-in-out infinite; }
+
+@keyframes carousel-progress { from { width: 0; } to { width: 100%; } }
